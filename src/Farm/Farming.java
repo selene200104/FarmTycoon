@@ -39,7 +39,6 @@ public class Farming {
 	}
 
 	Player player = new Player();
-	ManageCrops manageCrops = new ManageCrops();
 	
 	public JPanel farmingScene = new JPanel() {
 	/*	public void paintComponent(Graphics g) {
@@ -48,7 +47,9 @@ public class Farming {
 			g.drawImage(image.getImage(), 0, 0, d.width, d.height, this);
 		}*/
 	};
-	JButton[] fieldImages = new JButton[18];
+
+	static JButton[] fieldImages = new JButton[18];
+	static JLabel[] emergencyMarkingImages = new JLabel[18];//±ä±ÞÇ¥½Ã
 	JButton chooseSeedCanelButton = new JButton();
 	JPanel seedPlantingWindow = new JPanel();
 	
@@ -58,7 +59,7 @@ public class Farming {
 	JButton[] seedImage = new JButton[4];
 	JLabel[] seedExplanationImage = new JLabel[4];
 
-	ArrayList<String> statusOfField = new ArrayList<>();
+	static ArrayList<String> statusOfField = new ArrayList<>();
 	int fieldWidth = 80;
 	int fieldHeight = 80;
 	int fieldHorizontalLength = 90;
@@ -69,7 +70,7 @@ public class Farming {
 	int bottomWall = 488;
 	int upperWall = -7;
 	int numOfField = 0;
-	
+	int chooseSeedBoxLength = 10;//¾¾¾Ñ ¼±ÅÃ ¹Ú½ºÀÇ °¡·Î À§Ä¡ 
 
 	private void initialize() {
 
@@ -106,7 +107,6 @@ public class Farming {
 		seedPlantingWindow.setVisible(false);
 		farmingScene.add(seedPlantingWindow);
 		
-		int chooseSeedBoxLength = 10;//¾¾¾Ñ ¼±ÅÃ ¹Ú½ºÀÇ °¡·Î À§Ä¡ 
 		for (int i = 0; i < seedImage.length; i++) {
 			
 			seedPlantingWindow.add(seedImage[i] = new JButton());
@@ -159,11 +159,13 @@ public class Farming {
 		chooseSeedCanelButton.setBounds(200, 270, 100, 20);
 		seedPlantingWindow.add(chooseSeedCanelButton);
 		
+
+		
 		for (int i = 0; i < fieldImages.length; i++) {
 
 			farmingScene.add(fieldImages[i] = new JButton());
-			fieldImages[i].setIcon(
-					new ImageIcon("C:\\Users\\dayou\\OneDrive\\¹ÙÅÁ È­¸é\\ÆÀ³ë¹Ù\\java_teamProject\\basicsFieldImage.png"));
+			
+			fieldImages[i].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\¹ÙÅÁ È­¸é\\ÆÀ³ë¹Ù\\java_teamProject\\basicsFieldImage.png"));
 
 			if (i < 6) {
 				fieldVerticalLength = 50;
@@ -185,10 +187,17 @@ public class Farming {
 				fieldHorizontalLength = 90;
 			}
 			statusOfField.add("empty Field");
+			RotCrops rotCrops = new RotCrops(i);
+			rotCrops.start();
 		}
 		
+		for (int i = 0; i < emergencyMarkingImages.length; i++) {
+			farmingScene.add(emergencyMarkingImages[i] = new JLabel());
+			emergencyMarkingImages[i].setBounds(fieldImages[i].getX(), fieldImages[i].getY(), 20, 20);
+			emergencyMarkingImages[i].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\¹ÙÅÁ È­¸é\\ÆÀ³ë¹Ù\\java_teamProject\\EmergencyMarking.png"));
+			emergencyMarkingImages[i].setVisible(false);
+		}
 		
-
 		for (int i = 0; i < fieldImages.length; i++) {
 			fieldImages[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -205,8 +214,6 @@ public class Farming {
 		}
 
 
-
-		manageCrops.start();
 		frame.addKeyListener(new key());
 		frame.setFocusable(true);
 	}
@@ -253,8 +260,7 @@ public class Farming {
 			case KeyEvent.VK_SPACE:
 				//System.out.println(playerImage.getX());
 				for (int i = 0; i < fieldImages.length; i++) {
-					if(playerImage.getX() == fieldImages[i].getX()
-							&&playerImage.getY() == fieldImages[i].getY() + 15) {
+					if(playerImage.getX() == fieldImages[i].getX() && playerImage.getY() == fieldImages[i].getY() + 15) {
 						
 						if (statusOfField.get(numOfField).equals("empty Field")) {
 							seedPlantingWindow.setVisible(true);
