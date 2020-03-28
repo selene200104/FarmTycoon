@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -54,10 +55,10 @@ public class Farming {
 	JLabel playerImage = new JLabel();
 	JLabel houseImage = new JLabel();
 	JLabel storeImage = new JLabel();
-	JLabel[] seedImage = new JLabel[4];
+	JButton[] seedImage = new JButton[4];
 	JLabel[] seedExplanationImage = new JLabel[4];
 
-
+	ArrayList<String> statusOfField = new ArrayList<>();
 	int fieldWidth = 80;
 	int fieldHeight = 80;
 	int fieldHorizontalLength = 90;
@@ -67,6 +68,8 @@ public class Farming {
 	int leftWall = -10;
 	int bottomWall = 488;
 	int upperWall = -7;
+	int numOfField = 0;
+	
 
 	private void initialize() {
 
@@ -106,7 +109,7 @@ public class Farming {
 		int chooseSeedBoxLength = 10;//씨앗 선택 박스의 가로 위치 
 		for (int i = 0; i < seedImage.length; i++) {
 			
-			seedPlantingWindow.add(seedImage[i] = new JLabel());
+			seedPlantingWindow.add(seedImage[i] = new JButton());
 			seedPlantingWindow.add(seedExplanationImage[i] = new JLabel());
 			
 			seedImage[i].setBounds(chooseSeedBoxLength, 10, 105, 100);
@@ -120,6 +123,29 @@ public class Farming {
 			chooseSeedBoxLength = chooseSeedBoxLength + 124;
 		}
 
+		for (int i = 0; i < seedImage.length; i++) {
+			seedImage[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+
+					for (int i = 0; i < seedImage.length; i++) {
+						if (e.getSource() == seedImage[i]) {
+							
+							if (statusOfField.get(numOfField).equals("empty Field")) {
+								fieldImages[numOfField].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\seedFieldImage.png"));
+								statusOfField.set(numOfField, "seeded field");
+							}
+						}
+					}
+					
+					for (int j = 0; j < fieldImages.length; j++) {
+						fieldImages[j].setEnabled(true);
+					}
+					playerImage.setVisible(true);
+					seedPlantingWindow.setVisible(false);
+				}
+			});
+		}
+		
 		chooseSeedCanelButton.setText("취소하기");
 		chooseSeedCanelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -158,6 +184,7 @@ public class Farming {
 			if ((i + 1) % 6 == 0) {
 				fieldHorizontalLength = 90;
 			}
+			statusOfField.add("empty Field");
 		}
 		
 		
@@ -168,6 +195,7 @@ public class Farming {
 
 					for (int i = 0; i < fieldImages.length; i++) {
 						if (e.getSource() == fieldImages[i]) {
+							numOfField = i;
 							playerImage.setLocation(fieldImages[i].getX(), fieldImages[i].getY() + 15);
 							frame.requestFocus();
 						}
@@ -223,14 +251,29 @@ public class Farming {
 				break;
 				
 			case KeyEvent.VK_SPACE:
-				System.out.println(playerImage.getX());
+				//System.out.println(playerImage.getX());
 				for (int i = 0; i < fieldImages.length; i++) {
 					if(playerImage.getX() == fieldImages[i].getX()
 							&&playerImage.getY() == fieldImages[i].getY() + 15) {
-						seedPlantingWindow.setVisible(true);
-						for (int j = 0; j < fieldImages.length; j++) {
-							fieldImages[j].setEnabled(false);
+						
+						if (statusOfField.get(numOfField).equals("empty Field")) {
+							seedPlantingWindow.setVisible(true);
+
+							for (int j = 0; j < fieldImages.length; j++) {
+								fieldImages[j].setEnabled(false);
+							}
+							playerImage.setVisible(false);
+							
+						}else if(statusOfField.get(numOfField).equals("seeded field")) {
+							
+							
+							for (int j = 0; j < fieldImages.length; j++) {
+								fieldImages[j].setEnabled(false);
+							}
+							playerImage.setVisible(false);
 						}
+						
+
 					}
 				}
 			}
