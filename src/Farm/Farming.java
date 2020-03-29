@@ -3,6 +3,7 @@ package Farm;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,9 +52,10 @@ public class Farming {
 	};
 
 	static JLabel[] fieldImages = new JLabel[18];
-	static JLabel[] emergencyMarkingImages = new JLabel[18];//긴급표시
+	static JLabel[] emergencyMarkingImages = new JLabel[18];//물이 필요하다는 긴급표시
 	JButton chooseSeedCanelButton = new JButton();
 	JPanel seedPlantingWindow = new JPanel();
+	JPanel plantStateWindow = new JPanel();
 	
 	JLabel playerImage = new JLabel();
 	JLabel houseImage = new JLabel();
@@ -61,17 +63,31 @@ public class Farming {
 	JButton[] seedImage = new JButton[4];
 	JLabel[] seedExplanationImage = new JLabel[4];
 
+	//식물 상태창 
+	JLabel plantsImage = new JLabel();
+	JLabel plantsNametext = new JLabel();
+	JLabel timeLeftText = new JLabel();
+	JButton waterThePlantsButton = new JButton();
+	JButton rapidGrowthButton = new JButton();
+	JButton harvestingButton = new JButton();
+	JButton statusCheckCanelButton = new JButton();
+	
+	//밭
 	static ArrayList<String> statusOfField = new ArrayList<>();
+	int numOfField = 0;
 	int fieldWidth = 80;
 	int fieldHeight = 80;
 	int fieldHorizontalLength = 90;
 	int fieldVerticalLength = 50;
 	int fieldInterval = 100;
+	
+	//캐릭터
 	int rightWall = 725;
 	int leftWall = -10;
 	int bottomWall = 488;
 	int upperWall = -7;
-	int numOfField = 0;
+	
+	//씨앗 선택
 	int chooseSeedBoxLength = 10;//씨앗 선택 박스의 가로 위치 
 
 	private void initialize() {
@@ -103,6 +119,7 @@ public class Farming {
 		storeImage.setBounds(20, 400, 150, 150);
 		farmingScene.add(storeImage);
 		
+		//씨앗 심기 창
 		seedPlantingWindow.setBackground(Color.WHITE);
 		seedPlantingWindow.setBounds(150, 100, 500, 300);
 		seedPlantingWindow.setLayout(null);
@@ -158,11 +175,60 @@ public class Farming {
 				}
 			}
 		});
-		chooseSeedCanelButton.setBounds(200, 270, 100, 20);
+		chooseSeedCanelButton.setBounds(200, 270, 120, 20);
 		seedPlantingWindow.add(chooseSeedCanelButton);
 		
-
 		
+		//씨앗 상태 창
+		plantStateWindow.setBackground(Color.WHITE);
+		plantStateWindow.setBounds(150, 100, 500, 300);
+		plantStateWindow.setLayout(null);
+		plantStateWindow.setVisible(false);
+		farmingScene.add(plantStateWindow);
+
+		plantsImage.setBounds(30,60, 80, 80);
+		plantsImage.setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\seedFieldImage.png"));
+		plantStateWindow.add(plantsImage);
+		
+		plantsNametext.setText("이름 : ");
+		plantsNametext.setFont(new Font("굴림", Font.BOLD, 15));
+		plantsNametext.setBounds(150, 0, 150, 150);
+		plantStateWindow.add(plantsNametext);
+		
+		timeLeftText.setText("남은 일 수 : ");
+		timeLeftText.setFont(new Font("굴림", Font.BOLD, 15));
+		timeLeftText.setBounds(150, 40, 150, 150);
+		plantStateWindow.add(timeLeftText);
+
+		waterThePlantsButton.setText("물주기");
+		waterThePlantsButton.setFont(new Font("굴림", Font.BOLD, 15));
+		waterThePlantsButton.setBounds(15, 180, 120, 80);
+		plantStateWindow.add(waterThePlantsButton);
+		
+		rapidGrowthButton.setText("급속성장");
+		rapidGrowthButton.setFont(new Font("굴림", Font.BOLD, 15));
+		rapidGrowthButton.setBounds(190, 180, 120, 80);
+		plantStateWindow.add(rapidGrowthButton);
+		
+		harvestingButton.setText("수확하기");
+		harvestingButton.setFont(new Font("굴림", Font.BOLD, 15));
+		harvestingButton.setBounds(370, 180, 120, 80);
+		plantStateWindow.add(harvestingButton);
+		
+		statusCheckCanelButton.setText("취소하기");
+		statusCheckCanelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				plantStateWindow.setVisible(false);	
+				for (int i = 0; i < fieldImages.length; i++) {
+					fieldImages[i].setEnabled(true);
+				}
+			}
+		});
+		statusCheckCanelButton.setBounds(190, 270, 120, 20);
+		plantStateWindow.add(statusCheckCanelButton);
+		
+		//밭
 		for (int i = 0; i < fieldImages.length; i++) {
 			
 			farmingScene.add(emergencyMarkingImages[i] = new JLabel());
@@ -275,14 +341,13 @@ public class Farming {
 							playerImage.setVisible(false);
 							
 						}else if(statusOfField.get(numOfField).equals("seeded field")) {
-							
+							plantStateWindow.setVisible(true);
 							
 							for (int j = 0; j < fieldImages.length; j++) {
 								fieldImages[j].setEnabled(false);
 							}
 							playerImage.setVisible(false);
 						}
-						
 
 					}
 				}
