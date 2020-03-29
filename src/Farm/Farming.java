@@ -59,7 +59,7 @@ public class Farming {
 	JPanel seedPlantingWindow = new JPanel();
 	JPanel plantStateWindow = new JPanel();
 	
-	JLabel playerImage = new JLabel();
+	static JLabel playerImage = new JLabel();
 	JLabel playerEnergy = new JLabel();
 	JLabel daysText = new JLabel();
 	JLabel houseImage = new JLabel();
@@ -496,7 +496,10 @@ public class Farming {
 		            	for (int i = 0; i < fieldImages.length; i++) {
 							if (e.getSource() == fieldImages[i]) {
 								numOfField = i;
-								playerImage.setLocation(fieldImages[i].getX(), fieldImages[i].getY() + 10);
+								
+								PlayerOutoMove playerOutoMove = new PlayerOutoMove(numOfField);
+								playerOutoMove.start();
+								//playerImage.setLocation(fieldImages[i].getX(), fieldImages[i].getY() + 10);
 								frame.requestFocus();
 							}
 						}
