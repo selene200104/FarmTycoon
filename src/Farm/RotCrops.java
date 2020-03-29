@@ -11,8 +11,8 @@ public class RotCrops extends Thread{
 	Random random = new Random();
 	
 	int fieldNum = 0;
-	int minTime = 7000;
-	int maxTime = 10000;
+	int minTime = 10000;
+	int maxTime = 15000;
 	int randomShortageTime = 0;//물이 부족하기 까지 남은 시간
 	int randomRotTime = 0; //농작물이 썩기까지 남은 시간
 	boolean running = true;
@@ -34,19 +34,18 @@ public class RotCrops extends Thread{
 					
 					//느낌표 ! 표시 놓기 땅의 상태도 바꾸기
 					Farming.emergencyMarkingImages[fieldNum].setVisible(true);
+					System.out.println(Farming.emergencyMarkingImages[fieldNum].getX());
+					System.out.println(Farming.emergencyMarkingImages[fieldNum].getY());
 					Farming.statusOfField.set(fieldNum, "need Water field");
-					System.out.println(fieldNum + "번 땅이 물이 부족합니다");
-					System.out.println(Farming.statusOfField.get(fieldNum));
 					
 					//오랫동안 물을 주지 않으면 썩기 
 				}else if(Farming.statusOfField.get(fieldNum).equals("need Water field")) {
 					randomRotTime = random.nextInt(maxTime - minTime + 1) + minTime;
 					Thread.sleep(randomRotTime);
 					
+					Farming.emergencyMarkingImages[fieldNum].setVisible(false);
 					Farming.fieldImages[fieldNum].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\rottenFieldImage.png"));
 					Farming.statusOfField.set(fieldNum, "rotten field");
-					System.out.println(fieldNum + "번 땅이 썩었습니다");
-					System.out.println(Farming.statusOfField.get(fieldNum));
 				}
 				
 				Thread.sleep(1000);

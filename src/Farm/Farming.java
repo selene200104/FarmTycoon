@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -48,7 +50,7 @@ public class Farming {
 		}*/
 	};
 
-	static JButton[] fieldImages = new JButton[18];
+	static JLabel[] fieldImages = new JLabel[18];
 	static JLabel[] emergencyMarkingImages = new JLabel[18];//긴급표시
 	JButton chooseSeedCanelButton = new JButton();
 	JPanel seedPlantingWindow = new JPanel();
@@ -162,8 +164,9 @@ public class Farming {
 
 		
 		for (int i = 0; i < fieldImages.length; i++) {
-
-			farmingScene.add(fieldImages[i] = new JButton());
+			
+			farmingScene.add(emergencyMarkingImages[i] = new JLabel());
+			farmingScene.add(fieldImages[i] = new JLabel());
 			
 			fieldImages[i].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\basicsFieldImage.png"));
 
@@ -186,33 +189,34 @@ public class Farming {
 			if ((i + 1) % 6 == 0) {
 				fieldHorizontalLength = 90;
 			}
+			
+			emergencyMarkingImages[i].setBounds(fieldImages[i].getX() + 25, fieldImages[i].getY() + 25, 20, 20);
+			emergencyMarkingImages[i].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\EmergencyMarking.png"));
+			emergencyMarkingImages[i].setVisible(false);
+			
 			statusOfField.add("empty Field");
 			RotCrops rotCrops = new RotCrops(i);
 			rotCrops.start();
+		
 		}
 		
-		for (int i = 0; i < emergencyMarkingImages.length; i++) {
-			farmingScene.add(emergencyMarkingImages[i] = new JLabel());
-			emergencyMarkingImages[i].setBounds(fieldImages[i].getX(), fieldImages[i].getY(), 20, 20);
-			emergencyMarkingImages[i].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\EmergencyMarking.png"));
-			emergencyMarkingImages[i].setVisible(false);
-		}
+
 		
 		for (int i = 0; i < fieldImages.length; i++) {
-			fieldImages[i].addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-
-					for (int i = 0; i < fieldImages.length; i++) {
-						if (e.getSource() == fieldImages[i]) {
-							numOfField = i;
-							playerImage.setLocation(fieldImages[i].getX(), fieldImages[i].getY() + 15);
-							frame.requestFocus();
+			fieldImages[i].addMouseListener(new MouseAdapter() {
+		            @Override
+		            public void mouseClicked(MouseEvent e) { //마우스 클릭이벤트에서 동작할 내용 재정의
+		            	for (int i = 0; i < fieldImages.length; i++) {
+							if (e.getSource() == fieldImages[i]) {
+								numOfField = i;
+								playerImage.setLocation(fieldImages[i].getX(), fieldImages[i].getY() + 15);
+								frame.requestFocus();
+							}
 						}
-					}
-				}
-			});
-		}
 
+		            }          
+		        });
+		}
 
 		frame.addKeyListener(new key());
 		frame.setFocusable(true);
