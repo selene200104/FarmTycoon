@@ -323,6 +323,32 @@ public class Farming {
 		plantStateWindow.add(waterThePlantsButton);
 		
 		rapidGrowthButton.setText("급속성장");
+		rapidGrowthButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(player.numOfBone >= 1) {
+					player.numOfBone--;
+					
+					if(statusOfField.get(numOfField).equals("seeded field")
+							|| statusOfField.get(numOfField).equals("need Water field")
+							|| statusOfField.get(numOfField).equals("Proper field")) {
+						//성장한다
+						statusOfField.set(numOfField, "fullGrown field");
+						fieldImages[numOfField].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\fullGrownFieldImage.png"));
+					}
+				}
+				plantStateWindow.setVisible(false);	
+				playerImage.setVisible(true);
+				for (int i = 0; i < fieldImages.length; i++) {
+					fieldImages[i].setEnabled(true);
+					
+					plantsImage[numOfField].setVisible(false);
+					plantsNametext[numOfField].setVisible(false);
+					timeLeftText[numOfField].setVisible(false);
+					amountOfWater[numOfField].setVisible(false);
+				}
+			}
+		});
 		rapidGrowthButton.setFont(new Font("굴림", Font.BOLD, 15));
 		rapidGrowthButton.setBounds(190, 180, 120, 80);
 		plantStateWindow.add(rapidGrowthButton);
