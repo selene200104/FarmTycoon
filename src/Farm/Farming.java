@@ -536,28 +536,33 @@ public class Farming {
 			switch (keyCode) {
 
 			case KeyEvent.VK_UP:
+			case KeyEvent.VK_W:
 				if (playerImage.getY() >= upperWall) {
 					playerImage.setLocation(playerImage.getX(), playerImage.getY() - player.speed);
 				}
 				break;
 
 			case KeyEvent.VK_DOWN:
+			case KeyEvent.VK_S:
 				if (playerImage.getY() <= bottomWall) {
 					playerImage.setLocation(playerImage.getX(), playerImage.getY() + player.speed);
 				}
 				break;
 
 			case KeyEvent.VK_RIGHT:
+			case KeyEvent.VK_D:
 				if (playerImage.getX() <= rightWall) {
 					playerImage.setLocation(playerImage.getX() + player.speed, playerImage.getY());
 				}
 				break;
 
 			case KeyEvent.VK_LEFT:
+			case KeyEvent.VK_A:
 				if (playerImage.getX() >= leftWall) {
 					playerImage.setLocation(playerImage.getX() - player.speed, playerImage.getY());
 				}
 				break;
+			
 				
 			case KeyEvent.VK_SPACE:
 				
