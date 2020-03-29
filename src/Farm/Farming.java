@@ -337,11 +337,11 @@ public class Farming {
 					}else if(plantsNametext[numOfField].getText().equals("이름 : 당근")) {
 						player.numOfCarrot++;
 					}
-					
-					statusOfField.set(numOfField, "empty field");
-					fieldImages[numOfField].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\basicsFieldImage.png"));
 				}
-				
+				//다 자라지 않은 농작물을 수확한다면 농작물은 얻을 수 없으며 빈땅으로 되돌아간다
+				statusOfField.set(numOfField, "empty Field");
+				fieldImages[numOfField].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\basicsFieldImage.png"));
+
 				player.energy  = player.energy - 7;
 				playerEnergy.setText("남은 에너지 : " + player.energy);
 				
@@ -509,6 +509,16 @@ public class Farming {
 							plantsNametext[numOfField].setVisible(true);
 							timeLeftText[numOfField].setVisible(true);
 							amountOfWater[numOfField].setVisible(true);
+							
+							//만약 썩은 땅이라면 
+							if(statusOfField.get(numOfField).equals("rotten field")){
+								//물주기버튼과, 급속성장버튼을 누르지 못하게 한다
+								waterThePlantsButton.setEnabled(false);
+								rapidGrowthButton.setEnabled(false);
+							}else {
+								waterThePlantsButton.setEnabled(true);
+								rapidGrowthButton.setEnabled(true);
+							}
 							
 							for (int j = 0; j < fieldImages.length; j++) {
 								fieldImages[j].setEnabled(false);
