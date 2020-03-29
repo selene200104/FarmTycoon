@@ -319,6 +319,44 @@ public class Farming {
 		plantStateWindow.add(rapidGrowthButton);
 		
 		harvestingButton.setText("수확하기");
+		harvestingButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//다 자란 농작물을 수확한다면
+				if(statusOfField.get(numOfField).equals("fullGrown field")) {
+					
+					if(plantsNametext[numOfField].getText().equals("이름 : 파")) {
+						player.numOfWelshonion++;
+						
+					}else if(plantsNametext[numOfField].getText().equals("이름 : 양파")) {
+						player.numOfOnion++;
+						
+					}else if(plantsNametext[numOfField].getText().equals("이름 : 양배추")) {
+						player.numOfCabbage++;
+						
+					}else if(plantsNametext[numOfField].getText().equals("이름 : 당근")) {
+						player.numOfCarrot++;
+					}
+					
+					statusOfField.set(numOfField, "empty field");
+					fieldImages[numOfField].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\basicsFieldImage.png"));
+				}
+				
+				player.energy  = player.energy - 7;
+				playerEnergy.setText("남은 에너지 : " + player.energy);
+				
+				plantStateWindow.setVisible(false);	
+				playerImage.setVisible(true);
+				for (int i = 0; i < fieldImages.length; i++) {
+					fieldImages[i].setEnabled(true);
+					
+					plantsImage[numOfField].setVisible(false);
+					plantsNametext[numOfField].setVisible(false);
+					timeLeftText[numOfField].setVisible(false);
+					amountOfWater[numOfField].setVisible(false);
+				}
+			}
+		});
 		harvestingButton.setFont(new Font("굴림", Font.BOLD, 15));
 		harvestingButton.setBounds(370, 180, 120, 80);
 		plantStateWindow.add(harvestingButton);
