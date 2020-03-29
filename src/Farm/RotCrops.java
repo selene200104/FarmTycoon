@@ -52,8 +52,6 @@ public class RotCrops extends Thread{
 						Farming.statusOfField.set(fieldNum, "rotten field");
 					}
 					
-				}else if(Farming.statusOfField.get(fieldNum).equals("Proper field")) {
-					
 				}
 				
 				Thread.sleep(5000);

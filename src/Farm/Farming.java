@@ -59,6 +59,7 @@ public class Farming {
 	
 	JLabel playerImage = new JLabel();
 	JLabel playerEnergy = new JLabel();
+	JLabel daysText = new JLabel();
 	JLabel houseImage = new JLabel();
 	JLabel storeImage = new JLabel();
 	JButton[] seedImage = new JButton[4];
@@ -91,6 +92,10 @@ public class Farming {
 	
 	//씨앗 선택
 	int chooseSeedBoxLength = 10;//씨앗 선택 박스의 가로 위치 
+	int[] daysRemaining = new int[18]; //농작물이 자라기까지 남은 일수 
+	
+	//날짜
+	int day = 0;
 	
 	private void initialize() {
 
@@ -113,8 +118,13 @@ public class Farming {
 		
 		playerEnergy.setText("남은 에너지 : 100");
 		playerEnergy.setFont(new Font("굴림", Font.BOLD, 15));
-		playerEnergy.setBounds(650, -45, 150, 150);
+		playerEnergy.setBounds(650, -35, 150, 150);
 		farmingScene.add(playerEnergy);
+		
+		daysText.setText("0일차");
+		daysText.setFont(new Font("굴림", Font.BOLD, 15));
+		daysText.setBounds(650, -35, 100, 100);
+		farmingScene.add(daysText);
 		
 		houseImage.setHorizontalAlignment(SwingConstants.CENTER);
 		houseImage.setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\houseImage.png"));
@@ -155,6 +165,7 @@ public class Farming {
 				plantsNametext[numOfField].setText("이름 : 파");
 				timeLeftText[numOfField].setText("남은 일 수 : 2일");
 				
+				daysRemaining[numOfField] = 2;
 				player.energy  = player.energy - 5;
 				playerEnergy.setText("남은 에너지 : " + player.energy);
 			}
@@ -165,6 +176,7 @@ public class Farming {
 				plantsNametext[numOfField].setText("이름 : 양파");
 				timeLeftText[numOfField].setText("남은 일 수 : 2일");
 				
+				daysRemaining[numOfField] = 2;
 				player.energy  = player.energy - 5;
 				playerEnergy.setText("남은 에너지 : " + player.energy);
 			}
@@ -175,6 +187,7 @@ public class Farming {
 				plantsNametext[numOfField].setText("이름 : 양배추");
 				timeLeftText[numOfField].setText("남은 일 수 : 2일");
 				
+				daysRemaining[numOfField] = 2;
 				player.energy  = player.energy - 5;
 				playerEnergy.setText("남은 에너지 : " + player.energy);
 			}
@@ -185,6 +198,7 @@ public class Farming {
 				plantsNametext[numOfField].setText("이름 : 당근");
 				timeLeftText[numOfField].setText("남은 일 수 : 2일");
 				
+				daysRemaining[numOfField] = 2;
 				player.energy  = player.energy - 5;
 				playerEnergy.setText("남은 에너지 : " + player.energy);
 			}
@@ -383,6 +397,13 @@ public class Farming {
 		            }          
 		        });
 		}
+		
+		houseImage.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	playerImage.setLocation(houseImage.getX() - 50, houseImage.getY() + 20);
+            }          
+        });
 
 		frame.addKeyListener(new key());
 		frame.setFocusable(true);
@@ -428,9 +449,12 @@ public class Farming {
 				break;
 				
 			case KeyEvent.VK_SPACE:
+				
+				//밭의 앞에서 스페이스바를 눌렀을 때
 				for (int i = 0; i < fieldImages.length; i++) {
 					if(playerImage.getX() == fieldImages[i].getX() && playerImage.getY() == fieldImages[i].getY() + 15) {
 						
+						//비어있는 땅이라면 씨앗심기창을 보여준다
 						if (statusOfField.get(numOfField).equals("empty Field")) {
 							seedPlantingWindow.setVisible(true);
 							
@@ -439,6 +463,7 @@ public class Farming {
 							}
 							playerImage.setVisible(false);
 							
+							//씨앗이 심겨있는 밭이라면 농작물상태 창을 보여준다
 						}else {
 							plantStateWindow.setVisible(true);
 							
@@ -452,7 +477,26 @@ public class Farming {
 							}
 							playerImage.setVisible(false);
 						}
-
+					}
+				}
+				
+				//집 앞에 있을 때 스페이스바를 눌렀을 때
+				if(playerImage.getX() == houseImage.getX() - 50 && playerImage.getY() ==  houseImage.getY() + 20) {
+					player.energy = 100;
+					day++;
+					daysText.setText(day +"일차");
+					
+					for (int i = 0; i < fieldImages.length; i++) {
+						if (statusOfField.get(i).equals("Proper field")) {
+							daysRemaining[i]--;
+							timeLeftText[i].setText("남은 일 수 : " + daysRemaining[i]);
+							
+							//남은 일수가 0이라면
+							if(daysRemaining[i] == 0) {
+								statusOfField.set(i, "fullGrown field");
+								fieldImages[i].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\fullGrownFieldImage.png"));
+							}
+						}
 					}
 				}
 			}
