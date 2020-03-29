@@ -368,6 +368,7 @@ public class Farming {
 				}
 				plantStateWindow.setVisible(false);	
 				playerImage.setVisible(true);
+				
 				for (int i = 0; i < fieldImages.length; i++) {
 					fieldImages[i].setEnabled(true);
 					
@@ -488,7 +489,7 @@ public class Farming {
 		}
 		
 
-		
+		/*
 		for (int i = 0; i < fieldImages.length; i++) {
 			fieldImages[i].addMouseListener(new MouseAdapter() {
 		            @Override
@@ -502,7 +503,6 @@ public class Farming {
 								frame.requestFocus();
 							}
 						}
-
 		            }          
 		        });
 		}
@@ -514,7 +514,7 @@ public class Farming {
 				playerOutoMove.start();
             }          
         });
-
+*/
 		sparrowObstruction.start();
 		frame.addKeyListener(new key());
 		frame.setFocusable(true);
@@ -668,6 +668,7 @@ public class Farming {
 
 						JOptionPane.showMessageDialog(null, "하루가 지나갑니다", " ", JOptionPane.INFORMATION_MESSAGE);
 						player.energy = 100;
+						playerEnergy.setText("남은 에너지 : " + player.energy);
 						day++;
 						daysText.setText(day + "일차");
 

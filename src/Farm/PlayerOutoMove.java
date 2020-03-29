@@ -63,7 +63,6 @@ public class PlayerOutoMove extends Thread {
 				}
 			}
 			
-			
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
