@@ -58,6 +58,7 @@ public class Farming {
 	JPanel plantStateWindow = new JPanel();
 	
 	JLabel playerImage = new JLabel();
+	JLabel playerEnergy = new JLabel();
 	JLabel houseImage = new JLabel();
 	JLabel storeImage = new JLabel();
 	JButton[] seedImage = new JButton[4];
@@ -82,7 +83,7 @@ public class Farming {
 	int fieldVerticalLength = 50;
 	int fieldInterval = 100;
 	
-	//캐릭터
+	//벽
 	int rightWall = 725;
 	int leftWall = -10;
 	int bottomWall = 488;
@@ -90,7 +91,7 @@ public class Farming {
 	
 	//씨앗 선택
 	int chooseSeedBoxLength = 10;//씨앗 선택 박스의 가로 위치 
-
+	
 	private void initialize() {
 
 		frame = new JFrame();
@@ -110,6 +111,11 @@ public class Farming {
 		playerImage.setBounds(365, 338, 70, 80);
 		farmingScene.add(playerImage);
 		
+		playerEnergy.setText("남은 에너지 : 100");
+		playerEnergy.setFont(new Font("굴림", Font.BOLD, 15));
+		playerEnergy.setBounds(650, -45, 150, 150);
+		farmingScene.add(playerEnergy);
+		
 		houseImage.setHorizontalAlignment(SwingConstants.CENTER);
 		houseImage.setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\houseImage.png"));
 		houseImage.setBounds(620, 400, 150, 150);
@@ -127,6 +133,7 @@ public class Farming {
 		seedPlantingWindow.setVisible(false);
 		farmingScene.add(seedPlantingWindow);
 		
+		//씨앗 심기 창 안에있는 씨앗의 이미지와 씨앗의 설명을 초기화
 		for (int i = 0; i < seedImage.length; i++) {
 			
 			seedPlantingWindow.add(seedImage[i] = new JButton());
@@ -142,12 +149,14 @@ public class Farming {
 			
 			chooseSeedBoxLength = chooseSeedBoxLength + 124;
 		}
-
+		
 		seedImage[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				plantsNametext[numOfField].setText("이름 : 파");
 				timeLeftText[numOfField].setText("남은 일 수 : 2일");
-
+				
+				player.energy  = player.energy - 5;
+				playerEnergy.setText("남은 에너지 : " + player.energy);
 			}
 		});
 		
@@ -155,7 +164,9 @@ public class Farming {
 			public void actionPerformed(ActionEvent e) {
 				plantsNametext[numOfField].setText("이름 : 양파");
 				timeLeftText[numOfField].setText("남은 일 수 : 2일");
-
+				
+				player.energy  = player.energy - 5;
+				playerEnergy.setText("남은 에너지 : " + player.energy);
 			}
 		});
 		
@@ -164,6 +175,8 @@ public class Farming {
 				plantsNametext[numOfField].setText("이름 : 양배추");
 				timeLeftText[numOfField].setText("남은 일 수 : 2일");
 				
+				player.energy  = player.energy - 5;
+				playerEnergy.setText("남은 에너지 : " + player.energy);
 			}
 		});
 		
@@ -172,6 +185,8 @@ public class Farming {
 				plantsNametext[numOfField].setText("이름 : 당근");
 				timeLeftText[numOfField].setText("남은 일 수 : 2일");
 				
+				player.energy  = player.energy - 5;
+				playerEnergy.setText("남은 에너지 : " + player.energy);
 			}
 		});
 		
@@ -264,6 +279,9 @@ public class Farming {
 					amountOfWater[numOfField].setText("물의 양 : 부족");
 				}
 				
+				player.energy  = player.energy - 3;
+				playerEnergy.setText("남은 에너지 : " + player.energy);
+				
 				plantStateWindow.setVisible(false);	
 				playerImage.setVisible(true);
 				
@@ -353,7 +371,7 @@ public class Farming {
 		for (int i = 0; i < fieldImages.length; i++) {
 			fieldImages[i].addMouseListener(new MouseAdapter() {
 		            @Override
-		            public void mouseClicked(MouseEvent e) { //마우스 클릭이벤트에서 동작할 내용 재정의
+		            public void mouseClicked(MouseEvent e) {
 		            	for (int i = 0; i < fieldImages.length; i++) {
 							if (e.getSource() == fieldImages[i]) {
 								numOfField = i;
@@ -410,7 +428,6 @@ public class Farming {
 				break;
 				
 			case KeyEvent.VK_SPACE:
-				//System.out.println(playerImage.getX());
 				for (int i = 0; i < fieldImages.length; i++) {
 					if(playerImage.getX() == fieldImages[i].getX() && playerImage.getY() == fieldImages[i].getY() + 15) {
 						
