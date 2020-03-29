@@ -64,9 +64,10 @@ public class Farming {
 	JLabel[] seedExplanationImage = new JLabel[4];
 
 	//식물 상태창 
-	JLabel plantsImage = new JLabel();
-	JLabel plantsNametext = new JLabel();
-	JLabel timeLeftText = new JLabel();
+	JLabel[] plantsImage = new JLabel[18];
+	JLabel[] plantsNametext = new JLabel[18];
+	JLabel[] timeLeftText = new JLabel[18];
+	static JLabel[] amountOfWater = new JLabel[18];
 	JButton waterThePlantsButton = new JButton();
 	JButton rapidGrowthButton = new JButton();
 	JButton harvestingButton = new JButton();
@@ -142,6 +143,39 @@ public class Farming {
 			chooseSeedBoxLength = chooseSeedBoxLength + 124;
 		}
 
+		seedImage[0].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				plantsNametext[numOfField].setText("이름 : 파");
+				timeLeftText[numOfField].setText("남은 일 수 : 2일");
+
+			}
+		});
+		
+		seedImage[1].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				plantsNametext[numOfField].setText("이름 : 양파");
+				timeLeftText[numOfField].setText("남은 일 수 : 2일");
+
+			}
+		});
+		
+		seedImage[2].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				plantsNametext[numOfField].setText("이름 : 양배추");
+				timeLeftText[numOfField].setText("남은 일 수 : 2일");
+				
+			}
+		});
+		
+		seedImage[3].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				plantsNametext[numOfField].setText("이름 : 당근");
+				timeLeftText[numOfField].setText("남은 일 수 : 2일");
+				
+			}
+		});
+		
+		
 		for (int i = 0; i < seedImage.length; i++) {
 			seedImage[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -186,21 +220,63 @@ public class Farming {
 		plantStateWindow.setVisible(false);
 		farmingScene.add(plantStateWindow);
 
-		plantsImage.setBounds(30,60, 80, 80);
-		plantsImage.setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\seedFieldImage.png"));
-		plantStateWindow.add(plantsImage);
-		
-		plantsNametext.setText("이름 : ");
-		plantsNametext.setFont(new Font("굴림", Font.BOLD, 15));
-		plantsNametext.setBounds(150, 0, 150, 150);
-		plantStateWindow.add(plantsNametext);
-		
-		timeLeftText.setText("남은 일 수 : ");
-		timeLeftText.setFont(new Font("굴림", Font.BOLD, 15));
-		timeLeftText.setBounds(150, 40, 150, 150);
-		plantStateWindow.add(timeLeftText);
+		for (int i = 0; i < fieldImages.length; i++) {
+			
+			plantStateWindow.add(plantsImage[i] = new JLabel());
+			plantStateWindow.add(plantsNametext[i] = new JLabel());
+			plantStateWindow.add(timeLeftText[i] = new JLabel());
+			plantStateWindow.add(amountOfWater[i] = new JLabel());
+			
+			plantsImage[i].setBounds(30,60, 80, 80);
+			plantsImage[i].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\seedFieldImage.png"));
+			
+			plantsNametext[i].setText("이름 : ");
+			plantsNametext[i].setFont(new Font("굴림", Font.BOLD, 15));
+			plantsNametext[i].setBounds(150, 0, 150, 150);
+			
+			timeLeftText[i].setText("남은 일 수 : ");
+			timeLeftText[i].setFont(new Font("굴림", Font.BOLD, 15));
+			timeLeftText[i].setBounds(150, 30, 150, 150);
 
+			amountOfWater[i].setText("물의 양 : 부족");
+			amountOfWater[i].setFont(new Font("굴림", Font.BOLD, 15));
+			amountOfWater[i].setBounds(150, 60, 150, 150);
+			
+			plantsImage[i].setVisible(false);
+			plantsNametext[i].setVisible(false);
+			timeLeftText[i].setVisible(false);
+			amountOfWater[i].setVisible(false);
+		}
+		
 		waterThePlantsButton.setText("물주기");
+		waterThePlantsButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//씨앗만 뿌려진 상태라면 
+				if(statusOfField.get(numOfField).equals("seeded field")){
+					statusOfField.set(numOfField, "Proper field");
+					amountOfWater[numOfField].setText("물의 양 : 적당");
+				}
+				//물부족상태라면
+				if(statusOfField.get(numOfField).equals("need Water field")){
+					emergencyMarkingImages[numOfField].setVisible(false);
+					statusOfField.set(numOfField, "seeded field");
+					amountOfWater[numOfField].setText("물의 양 : 부족");
+				}
+				
+				plantStateWindow.setVisible(false);	
+				playerImage.setVisible(true);
+				
+				for (int i = 0; i < fieldImages.length; i++) {
+					fieldImages[i].setEnabled(true);
+					
+					plantsImage[numOfField].setVisible(false);
+					plantsNametext[numOfField].setVisible(false);
+					timeLeftText[numOfField].setVisible(false);
+					amountOfWater[numOfField].setVisible(false);
+				}
+			}
+		});
 		waterThePlantsButton.setFont(new Font("굴림", Font.BOLD, 15));
 		waterThePlantsButton.setBounds(15, 180, 120, 80);
 		plantStateWindow.add(waterThePlantsButton);
@@ -220,8 +296,14 @@ public class Farming {
 			public void actionPerformed(ActionEvent e) {
 				
 				plantStateWindow.setVisible(false);	
+				playerImage.setVisible(true);
 				for (int i = 0; i < fieldImages.length; i++) {
 					fieldImages[i].setEnabled(true);
+					
+					plantsImage[numOfField].setVisible(false);
+					plantsNametext[numOfField].setVisible(false);
+					timeLeftText[numOfField].setVisible(false);
+					amountOfWater[numOfField].setVisible(false);
 				}
 			}
 		});
@@ -334,14 +416,19 @@ public class Farming {
 						
 						if (statusOfField.get(numOfField).equals("empty Field")) {
 							seedPlantingWindow.setVisible(true);
-
+							
 							for (int j = 0; j < fieldImages.length; j++) {
 								fieldImages[j].setEnabled(false);
 							}
 							playerImage.setVisible(false);
 							
-						}else if(statusOfField.get(numOfField).equals("seeded field")) {
+						}else {
 							plantStateWindow.setVisible(true);
+							
+							plantsImage[numOfField].setVisible(true);
+							plantsNametext[numOfField].setVisible(true);
+							timeLeftText[numOfField].setVisible(true);
+							amountOfWater[numOfField].setVisible(true);
 							
 							for (int j = 0; j < fieldImages.length; j++) {
 								fieldImages[j].setEnabled(false);

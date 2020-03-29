@@ -30,25 +30,33 @@ public class RotCrops extends Thread{
 				
 				if (Farming.statusOfField.get(fieldNum).equals("seeded field")) {
 					randomShortageTime = random.nextInt(maxTime - minTime + 1) + minTime;
+					
 					Thread.sleep(randomShortageTime);
 					
-					//느낌표 ! 표시 놓기 땅의 상태도 바꾸기
-					Farming.emergencyMarkingImages[fieldNum].setVisible(true);
-					System.out.println(Farming.emergencyMarkingImages[fieldNum].getX());
-					System.out.println(Farming.emergencyMarkingImages[fieldNum].getY());
-					Farming.statusOfField.set(fieldNum, "need Water field");
+					if(Farming.statusOfField.get(fieldNum).equals("seeded field")) {
+						
+						Farming.emergencyMarkingImages[fieldNum].setVisible(true);
+						Farming.statusOfField.set(fieldNum, "need Water field");
+						Farming.amountOfWater[fieldNum].setText("물의 양 : 매우부족");
+					}
+
 					
 					//오랫동안 물을 주지 않으면 썩기 
 				}else if(Farming.statusOfField.get(fieldNum).equals("need Water field")) {
 					randomRotTime = random.nextInt(maxTime - minTime + 1) + minTime;
 					Thread.sleep(randomRotTime);
 					
-					Farming.emergencyMarkingImages[fieldNum].setVisible(false);
-					Farming.fieldImages[fieldNum].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\rottenFieldImage.png"));
-					Farming.statusOfField.set(fieldNum, "rotten field");
+					if(Farming.statusOfField.get(fieldNum).equals("need Water field")) {
+						Farming.emergencyMarkingImages[fieldNum].setVisible(false);
+						Farming.fieldImages[fieldNum].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\rottenFieldImage.png"));
+						Farming.statusOfField.set(fieldNum, "rotten field");
+					}
+					
+				}else if(Farming.statusOfField.get(fieldNum).equals("Proper field")) {
+					
 				}
 				
-				Thread.sleep(1000);
+				Thread.sleep(5000);
 
 			} catch (InterruptedException e) {
 				running = false;
