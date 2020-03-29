@@ -62,7 +62,7 @@ public class Farming {
 	static JLabel playerImage = new JLabel();
 	JLabel playerEnergy = new JLabel();
 	JLabel daysText = new JLabel();
-	JLabel houseImage = new JLabel();
+	static JLabel houseImage = new JLabel();
 	JLabel storeImage = new JLabel();
 	JButton[] seedImage = new JButton[4];
 	JLabel[] seedExplanationImage = new JLabel[4];
@@ -497,9 +497,8 @@ public class Farming {
 							if (e.getSource() == fieldImages[i]) {
 								numOfField = i;
 								
-								PlayerOutoMove playerOutoMove = new PlayerOutoMove(numOfField);
+								PlayerOutoMove playerOutoMove = new PlayerOutoMove(numOfField, "fields");
 								playerOutoMove.start();
-								//playerImage.setLocation(fieldImages[i].getX(), fieldImages[i].getY() + 10);
 								frame.requestFocus();
 							}
 						}
@@ -511,7 +510,8 @@ public class Farming {
 		houseImage.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	playerImage.setLocation(houseImage.getX() - 50, houseImage.getY() + 20);
+            	PlayerOutoMove playerOutoMove = new PlayerOutoMove(0, "house");
+				playerOutoMove.start();
             }          
         });
 
@@ -656,21 +656,26 @@ public class Farming {
 					}
 				}
 				
-				//집 앞에 있을 때 스페이스바를 눌렀을 때
-				if(playerImage.getX() == houseImage.getX() - 50 && playerImage.getY() ==  houseImage.getY() + 20) {
-					player.energy = 100;
-					day++;
-					daysText.setText(day +"일차");
-					
-					for (int i = 0; i < fieldImages.length; i++) {
-						if (statusOfField.get(i).equals("Proper field")) {
-							daysRemaining[i]--;
-							timeLeftText[i].setText("남은 일 수 : " + daysRemaining[i]);
-							
-							//남은 일수가 0이라면
-							if(daysRemaining[i] == 0) {
-								statusOfField.set(i, "fullGrown field");
-								fieldImages[i].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\fullGrownFieldImage.png"));
+				
+					//집에서 스페이스바를 눌렀을 때
+				if (playerImage.getY() >= 330 && playerImage.getY() <= 475) {
+					if (playerImage.getX() >= 600 && playerImage.getY() <= 720) {
+
+						JOptionPane.showMessageDialog(null, "하루가 지나갑니다", " ", JOptionPane.INFORMATION_MESSAGE);
+						player.energy = 100;
+						day++;
+						daysText.setText(day + "일차");
+
+						for (int i = 0; i < fieldImages.length; i++) {
+							if (statusOfField.get(i).equals("Proper field")) {
+								daysRemaining[i]--;
+								timeLeftText[i].setText("남은 일 수 : " + daysRemaining[i]);
+
+								// 남은 일수가 0이라면
+								if (daysRemaining[i] == 0) {
+									statusOfField.set(i, "fullGrown field");
+									fieldImages[i].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\fullGrownFieldImage.png"));
+								}
 							}
 						}
 					}
