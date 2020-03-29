@@ -262,6 +262,7 @@ public class Farming {
 		chooseSeedCanelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				playerImage.setVisible(true);
 				seedPlantingWindow.setVisible(false);	
 				for (int i = 0; i < fieldImages.length; i++) {
 					fieldImages[i].setEnabled(true);
@@ -495,7 +496,7 @@ public class Farming {
 		            	for (int i = 0; i < fieldImages.length; i++) {
 							if (e.getSource() == fieldImages[i]) {
 								numOfField = i;
-								playerImage.setLocation(fieldImages[i].getX(), fieldImages[i].getY() + 15);
+								playerImage.setLocation(fieldImages[i].getX(), fieldImages[i].getY() + 10);
 								frame.requestFocus();
 							}
 						}
@@ -557,43 +558,98 @@ public class Farming {
 				
 			case KeyEvent.VK_SPACE:
 				
-				//밭의 앞에서 스페이스바를 눌렀을 때
-				for (int i = 0; i < fieldImages.length; i++) {
-					if(playerImage.getX() == fieldImages[i].getX() && playerImage.getY() == fieldImages[i].getY() + 15) {
-						
-						//비어있는 땅이라면 씨앗심기창을 보여준다
-						if (statusOfField.get(numOfField).equals("empty Field")) {
-							seedPlantingWindow.setVisible(true);
-							
-							for (int j = 0; j < fieldImages.length; j++) {
-								fieldImages[j].setEnabled(false);
-							}
-							playerImage.setVisible(false);
-							
-							//씨앗이 심겨있는 밭이라면 농작물상태 창을 보여준다
-						}else {
-							plantStateWindow.setVisible(true);
-							
-							plantsImage[numOfField].setVisible(true);
-							plantsNametext[numOfField].setVisible(true);
-							timeLeftText[numOfField].setVisible(true);
-							amountOfWater[numOfField].setVisible(true);
-							
-							//만약 썩은 땅이라면 
-							if(statusOfField.get(numOfField).equals("rotten field")){
-								//물주기버튼과, 급속성장버튼을 누르지 못하게 한다
-								waterThePlantsButton.setEnabled(false);
-								rapidGrowthButton.setEnabled(false);
-							}else {
-								waterThePlantsButton.setEnabled(true);
-								rapidGrowthButton.setEnabled(true);
-							}
-							
-							for (int j = 0; j < fieldImages.length; j++) {
-								fieldImages[j].setEnabled(false);
-							}
-							playerImage.setVisible(false);
+					// 밭의 첫번째 줄
+					if (playerImage.getY() <= 54) {
+
+						if (playerImage.getX() >= 70 && playerImage.getX() <= 120) {
+							numOfField = 0;
+							information();
+
+						} else if (playerImage.getX() >= 170 && playerImage.getX() <= 220) {
+							numOfField = 1;
+							information();
+
+						} else if (playerImage.getX() >= 270 && playerImage.getX() <= 320) {
+							numOfField = 2;
+							information();
+
+						} else if (playerImage.getX() >= 370 && playerImage.getX() <= 420) {
+							numOfField = 3;
+							information();
+
+						} else if (playerImage.getX() >= 470 && playerImage.getX() <= 520) {
+							numOfField = 4;
+							information();
+
+						} else if (playerImage.getX() >= 570 && playerImage.getX() <= 620) {
+							numOfField = 5;
+							information();
+
 						}
+						// 밭의 두번째 줄
+					} else if (playerImage.getY() >= 68 && playerImage.getY() <= 143) {
+
+						// 첫번째 칸
+						if (playerImage.getX() >= 70 && playerImage.getX() <= 120) {
+							numOfField = 6;
+							information();
+
+						} else if (playerImage.getX() >= 170 && playerImage.getX() <= 220) {
+							numOfField = 7;
+							information();
+
+						} else if (playerImage.getX() >= 270 && playerImage.getX() <= 320) {
+							numOfField = 8;
+							information();
+
+						} else if (playerImage.getX() >= 370 && playerImage.getX() <= 420) {
+							numOfField = 9;
+							information();
+
+						} else if (playerImage.getX() >= 470 && playerImage.getX() <= 520) {
+							numOfField = 10;
+							information();
+
+						} else if (playerImage.getX() >= 570 && playerImage.getX() <= 620) {
+							numOfField = 11;
+							information();
+
+						}
+
+					} else if (playerImage.getY() >= 160 && playerImage.getY() <= 235) {
+
+						if (playerImage.getX() >= 70 && playerImage.getX() <= 120) {
+							numOfField = 12;
+							information();
+
+						} else if (playerImage.getX() >= 170 && playerImage.getX() <= 220) {
+							numOfField = 13;
+							information();
+
+						} else if (playerImage.getX() >= 270 && playerImage.getX() <= 320) {
+							numOfField = 14;
+							information();
+
+						} else if (playerImage.getX() >= 370 && playerImage.getX() <= 420) {
+							numOfField = 15;
+							information();
+
+						} else if (playerImage.getX() >= 470 && playerImage.getX() <= 520) {
+							numOfField = 16;
+							information();
+
+						} else if (playerImage.getX() >= 570 && playerImage.getX() <= 620) {
+							numOfField = 17;
+							information();
+							
+						}
+
+					}
+					
+					//밭의 앞에서 스페이스바를 눌렀을 때
+					for (int i = 0; i < fieldImages.length; i++) {
+					if(playerImage.getX() == fieldImages[i].getX() && playerImage.getY() == fieldImages[i].getY() + 10) {
+						information();
 					}
 				}
 				
@@ -622,6 +678,43 @@ public class Farming {
 		// 키보드의 키가 눌렸다 때었을때 실행
 		@Override
 		public void keyReleased(KeyEvent e) {
+		}
+	}
+	
+	public void information(){
+
+		//비어있는 땅이라면 씨앗심기창을 보여준다
+		if (statusOfField.get(numOfField).equals("empty Field")) {
+			seedPlantingWindow.setVisible(true);
+			
+			for (int j = 0; j < fieldImages.length; j++) {
+				fieldImages[j].setEnabled(false);
+			}
+			playerImage.setVisible(false);
+			
+			//씨앗이 심겨있는 밭이라면 농작물상태 창을 보여준다
+		}else {
+			plantStateWindow.setVisible(true);
+			
+			plantsImage[numOfField].setVisible(true);
+			plantsNametext[numOfField].setVisible(true);
+			timeLeftText[numOfField].setVisible(true);
+			amountOfWater[numOfField].setVisible(true);
+			
+			//만약 썩은 땅이라면 
+			if(statusOfField.get(numOfField).equals("rotten field")){
+				//물주기버튼과, 급속성장버튼을 누르지 못하게 한다
+				waterThePlantsButton.setEnabled(false);
+				rapidGrowthButton.setEnabled(false);
+			}else {
+				waterThePlantsButton.setEnabled(true);
+				rapidGrowthButton.setEnabled(true);
+			}
+			
+			for (int j = 0; j < fieldImages.length; j++) {
+				fieldImages[j].setEnabled(false);
+			}
+			playerImage.setVisible(false);
 		}
 	}
 }
