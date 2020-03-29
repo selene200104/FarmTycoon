@@ -42,6 +42,7 @@ public class Farming {
 	}
 
 	Player player = new Player();
+	SparrowObstruction sparrowObstruction = new SparrowObstruction();
 	
 	public JPanel farmingScene = new JPanel() {
 	/*	public void paintComponent(Graphics g) {
@@ -74,6 +75,9 @@ public class Farming {
 	JButton rapidGrowthButton = new JButton();
 	JButton harvestingButton = new JButton();
 	JButton statusCheckCanelButton = new JButton();
+	
+	//Âü»õ
+	static JLabel sparrowImage = new JLabel();
 	
 	//¹ç
 	static ArrayList<String> statusOfField = new ArrayList<>();
@@ -135,6 +139,11 @@ public class Farming {
 		storeImage.setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\¹ÙÅÁ È­¸é\\ÆÀ³ë¹Ù\\java_teamProject\\storeImage.png"));
 		storeImage.setBounds(20, 400, 150, 150);
 		farmingScene.add(storeImage);
+		
+		sparrowImage.setHorizontalAlignment(SwingConstants.CENTER);
+		sparrowImage.setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\¹ÙÅÁ È­¸é\\ÆÀ³ë¹Ù\\java_teamProject\\sparrow.png"));
+		sparrowImage.setBounds(-100, -100, 100, 50);
+		farmingScene.add(sparrowImage);
 		
 		//¾¾¾Ñ ½É±â Ã¢
 		seedPlantingWindow.setBackground(Color.WHITE);
@@ -443,6 +452,7 @@ public class Farming {
             }          
         });
 
+		sparrowObstruction.start();
 		frame.addKeyListener(new key());
 		frame.setFocusable(true);
 	}
