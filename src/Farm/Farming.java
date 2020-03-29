@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JPanel;
 
@@ -171,45 +172,65 @@ public class Farming {
 		
 		seedImage[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				plantsNametext[numOfField].setText("이름 : 파");
-				timeLeftText[numOfField].setText("남은 일 수 : 2일");
 				
-				daysRemaining[numOfField] = 2;
-				player.energy  = player.energy - 5;
-				playerEnergy.setText("남은 에너지 : " + player.energy);
+				if (player.energy <= 5) {
+					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					plantsNametext[numOfField].setText("이름 : 파");
+					timeLeftText[numOfField].setText("남은 일 수 : 2일");
+
+					daysRemaining[numOfField] = 2;
+					player.energy = player.energy - 5;
+					playerEnergy.setText("남은 에너지 : " + player.energy);
+				}
 			}
 		});
 		
 		seedImage[1].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				plantsNametext[numOfField].setText("이름 : 양파");
-				timeLeftText[numOfField].setText("남은 일 수 : 2일");
-				
-				daysRemaining[numOfField] = 2;
-				player.energy  = player.energy - 5;
-				playerEnergy.setText("남은 에너지 : " + player.energy);
+
+				if (player.energy <= 5) {
+					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					plantsNametext[numOfField].setText("이름 : 양파");
+					timeLeftText[numOfField].setText("남은 일 수 : 2일");
+
+					daysRemaining[numOfField] = 2;
+					player.energy = player.energy - 5;
+					playerEnergy.setText("남은 에너지 : " + player.energy);
+				}
 			}
 		});
 		
 		seedImage[2].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				plantsNametext[numOfField].setText("이름 : 양배추");
-				timeLeftText[numOfField].setText("남은 일 수 : 2일");
-				
-				daysRemaining[numOfField] = 2;
-				player.energy  = player.energy - 5;
-				playerEnergy.setText("남은 에너지 : " + player.energy);
+
+				if (player.energy <= 5) {
+					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					plantsNametext[numOfField].setText("이름 : 양배추");
+					timeLeftText[numOfField].setText("남은 일 수 : 2일");
+
+					daysRemaining[numOfField] = 2;
+					player.energy = player.energy - 5;
+					playerEnergy.setText("남은 에너지 : " + player.energy);
+				}
 			}
 		});
 		
 		seedImage[3].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				plantsNametext[numOfField].setText("이름 : 당근");
-				timeLeftText[numOfField].setText("남은 일 수 : 2일");
-				
-				daysRemaining[numOfField] = 2;
-				player.energy  = player.energy - 5;
-				playerEnergy.setText("남은 에너지 : " + player.energy);
+
+				if (player.energy <= 5) {
+					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					plantsNametext[numOfField].setText("이름 : 당근");
+					timeLeftText[numOfField].setText("남은 일 수 : 2일");
+
+					daysRemaining[numOfField] = 2;
+					player.energy = player.energy - 5;
+					playerEnergy.setText("남은 에너지 : " + player.energy);
+				}
 			}
 		});
 		
@@ -290,20 +311,25 @@ public class Farming {
 		waterThePlantsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//씨앗만 뿌려진 상태라면 
-				if(statusOfField.get(numOfField).equals("seeded field")){
-					statusOfField.set(numOfField, "Proper field");
-					amountOfWater[numOfField].setText("물의 양 : 적당");
+				if(player.energy <= 3) {
+					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+
+					// 씨앗만 뿌려진 상태라면
+					if (statusOfField.get(numOfField).equals("seeded field")) {
+						statusOfField.set(numOfField, "Proper field");
+						amountOfWater[numOfField].setText("물의 양 : 적당");
+					}
+					// 물부족상태라면
+					if (statusOfField.get(numOfField).equals("need Water field")) {
+						emergencyMarkingImages[numOfField].setVisible(false);
+						statusOfField.set(numOfField, "seeded field");
+						amountOfWater[numOfField].setText("물의 양 : 부족");
+					}
+
+					player.energy = player.energy - 3;
+					playerEnergy.setText("남은 에너지 : " + player.energy);
 				}
-				//물부족상태라면
-				if(statusOfField.get(numOfField).equals("need Water field")){
-					emergencyMarkingImages[numOfField].setVisible(false);
-					statusOfField.set(numOfField, "seeded field");
-					amountOfWater[numOfField].setText("물의 양 : 부족");
-				}
-				
-				player.energy  = player.energy - 3;
-				playerEnergy.setText("남은 에너지 : " + player.energy);
 				
 				plantStateWindow.setVisible(false);	
 				playerImage.setVisible(true);
@@ -336,6 +362,8 @@ public class Farming {
 						statusOfField.set(numOfField, "fullGrown field");
 						fieldImages[numOfField].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\fullGrownFieldImage.png"));
 					}
+				}else {
+					JOptionPane.showMessageDialog(null, "뼈의 개수가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
 				}
 				plantStateWindow.setVisible(false);	
 				playerImage.setVisible(true);
@@ -357,28 +385,33 @@ public class Farming {
 		harvestingButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//다 자란 농작물을 수확한다면
-				if(statusOfField.get(numOfField).equals("fullGrown field")) {
+				if(player.energy <= 7) {
+					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+				}else {
 					
-					if(plantsNametext[numOfField].getText().equals("이름 : 파")) {
-						player.numOfWelshonion++;
+					//다 자란 농작물을 수확한다면
+					if(statusOfField.get(numOfField).equals("fullGrown field")) {
 						
-					}else if(plantsNametext[numOfField].getText().equals("이름 : 양파")) {
-						player.numOfOnion++;
-						
-					}else if(plantsNametext[numOfField].getText().equals("이름 : 양배추")) {
-						player.numOfCabbage++;
-						
-					}else if(plantsNametext[numOfField].getText().equals("이름 : 당근")) {
-						player.numOfCarrot++;
+						if(plantsNametext[numOfField].getText().equals("이름 : 파")) {
+							player.numOfWelshonion++;
+							
+						}else if(plantsNametext[numOfField].getText().equals("이름 : 양파")) {
+							player.numOfOnion++;
+							
+						}else if(plantsNametext[numOfField].getText().equals("이름 : 양배추")) {
+							player.numOfCabbage++;
+							
+						}else if(plantsNametext[numOfField].getText().equals("이름 : 당근")) {
+							player.numOfCarrot++;
+						}
 					}
-				}
-				//다 자라지 않은 농작물을 수확한다면 농작물은 얻을 수 없으며 빈땅으로 되돌아간다
-				statusOfField.set(numOfField, "empty Field");
-				fieldImages[numOfField].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\basicsFieldImage.png"));
+					//다 자라지 않은 농작물을 수확한다면 농작물은 얻을 수 없으며 빈땅으로 되돌아간다
+					statusOfField.set(numOfField, "empty Field");
+					fieldImages[numOfField].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\basicsFieldImage.png"));
 
-				player.energy  = player.energy - 7;
-				playerEnergy.setText("남은 에너지 : " + player.energy);
+					player.energy  = player.energy - 7;
+					playerEnergy.setText("남은 에너지 : " + player.energy);
+				}
 				
 				plantStateWindow.setVisible(false);	
 				playerImage.setVisible(true);
