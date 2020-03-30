@@ -79,6 +79,18 @@ public class Farming {
 	JButton harvestingButton = new JButton();
 	JButton statusCheckCanelButton = new JButton();
 	
+	//인벤토리
+	JLabel inventoryWindow = new JLabel();
+	JLabel[] inventoryCompartment = new JLabel[16]; //인벤토리 칸
+	JLabel[] numberOfItemsText = new JLabel[16]; //물품이 몇개있지 text
+	JLabel[] inventoryDescriptionText = new JLabel[4]; //인벤토리 설명 (어떤 칸인지)
+	int inventoryHorizontalLength = 5;
+	int inventoryVerticalLength = 0;
+	int inventoryInterval = 100;
+	int inventoryWidth = 90;
+	int inventoryHeight = 60;
+	int inventoryDescriptionlength = 0;
+	
 	//참새
 	static JLabel sparrowImage = new JLabel();
 	
@@ -149,6 +161,77 @@ public class Farming {
 		sparrowImage.setBounds(-100, -100, 100, 50);
 		farmingScene.add(sparrowImage);
 		
+		//인벤토리 창
+		inventoryWindow.setIcon(new ImageIcon("./images/inventoryBackGround.png"));
+		inventoryWindow.setBounds(180, 80, 400, 350);
+		inventoryWindow.setLayout(null);
+		inventoryWindow.setVisible(false);
+		farmingScene.add(inventoryWindow);
+		
+		for (int i = 0; i < inventoryCompartment.length; i++) {
+			inventoryWindow.add(numberOfItemsText[i] = new JLabel());
+			inventoryWindow.add(inventoryCompartment[i] = new JLabel());
+		
+			if (i < 4) {
+				inventoryVerticalLength = 30;
+				inventoryCompartment[i].setBounds(inventoryHorizontalLength, inventoryVerticalLength, inventoryWidth , inventoryHeight);
+				numberOfItemsText[i].setBounds(inventoryHorizontalLength + 40, inventoryVerticalLength + 20, 50 , 50);
+
+			} else if ((i >= 4) && (i < 8)) {
+				inventoryVerticalLength = 120;
+				inventoryCompartment[i].setBounds(inventoryHorizontalLength, inventoryVerticalLength, inventoryWidth, inventoryHeight);
+				numberOfItemsText[i].setBounds(inventoryHorizontalLength + 40, inventoryVerticalLength + 20, 50 , 50);
+				
+			} else if ((i >= 8) && (i < 12)) {
+				inventoryVerticalLength = 210;
+				inventoryCompartment[i].setBounds(inventoryHorizontalLength, inventoryVerticalLength, inventoryWidth, inventoryHeight);
+				numberOfItemsText[i].setBounds(inventoryHorizontalLength + 40, inventoryVerticalLength + 20, 50 , 50);
+				
+			} else if ((i >= 12) && (i < 16)) {
+				inventoryVerticalLength = 295;
+				inventoryCompartment[i].setBounds(inventoryHorizontalLength, inventoryVerticalLength, inventoryWidth, inventoryHeight);
+				numberOfItemsText[i].setBounds(inventoryHorizontalLength + 40, inventoryVerticalLength + 20, 50 , 50);
+			}
+			inventoryHorizontalLength = inventoryInterval + inventoryHorizontalLength;
+			
+			if ((i + 1) % 4 == 0) {
+				inventoryHorizontalLength = 5;
+			}
+
+			inventoryCompartment[i].setHorizontalAlignment(SwingConstants.CENTER);
+			//inventoryCompartment[i].setIcon(new ImageIcon("./images/storeImage.png"));
+			
+			numberOfItemsText[i].setHorizontalAlignment(SwingConstants.CENTER);
+			numberOfItemsText[i].setText("X 0");
+		}
+		inventoryCompartment[0].setIcon(new ImageIcon("./images/PumkinFieldImage.png"));
+		inventoryCompartment[1].setIcon(new ImageIcon("./images/OnionFieldImage.png"));
+		inventoryCompartment[2].setIcon(new ImageIcon("./images/CabbageFieldImage.png"));
+		inventoryCompartment[3].setIcon(new ImageIcon("./images/CarrotFieldImage.png"));
+		inventoryCompartment[4].setIcon(new ImageIcon("./images/PumkinFieldImage.png"));
+		inventoryCompartment[5].setIcon(new ImageIcon("./images/OnionFieldImage.png"));
+		inventoryCompartment[6].setIcon(new ImageIcon("./images/CabbageFieldImage.png"));
+		inventoryCompartment[7].setIcon(new ImageIcon("./images/CarrotFieldImage.png"));
+		inventoryCompartment[8].setIcon(new ImageIcon("./images/PumkinFieldImage.png"));
+		inventoryCompartment[9].setIcon(new ImageIcon("./images/OnionFieldImage.png"));
+		inventoryCompartment[10].setIcon(new ImageIcon("./images/CabbageFieldImage.png"));
+		inventoryCompartment[11].setIcon(new ImageIcon("./images/CarrotFieldImage.png"));
+		inventoryCompartment[12].setIcon(new ImageIcon("./images/PumkinFieldImage.png"));
+		inventoryCompartment[13].setIcon(new ImageIcon("./images/OnionFieldImage.png"));
+		inventoryCompartment[14].setIcon(new ImageIcon("./images/CabbageFieldImage.png"));
+		inventoryCompartment[15].setIcon(new ImageIcon("./images/CarrotFieldImage.png"));
+		
+		for (int i = 0; i < inventoryDescriptionText.length; i++) {
+			inventoryWindow.add(inventoryDescriptionText[i] = new JLabel());
+			
+			inventoryDescriptionText[i].setBounds(10, inventoryDescriptionlength, 50, 50);
+			inventoryDescriptionlength = inventoryDescriptionlength + 85;
+		}
+		inventoryDescriptionText[0].setText("씨앗");
+		inventoryDescriptionText[1].setText("농작물");
+		inventoryDescriptionText[2].setText("포션");
+		inventoryDescriptionText[3].setText("그 외");
+		
 		//씨앗 심기 창
 		seedPlantingWindow.setBackground(Color.WHITE);
 		seedPlantingWindow.setBounds(150, 100, 500, 300);
@@ -173,7 +256,6 @@ public class Farming {
 			
 			seedImage[i].setFocusPainted(false);
 			seedImage[i].setContentAreaFilled(false);
-			//seedImage[i].setBorderPainted(false);
 		}
 		
 		seedImage[0].setIcon(new ImageIcon("./images/PumkinFieldImage.png"));
@@ -753,6 +835,29 @@ public class Farming {
 						}
 					}
 				}
+				break;
+				
+			case KeyEvent.VK_E:
+				
+				if (inventoryWindow.isVisible() == true) {
+					inventoryWindow.setVisible(false);
+					playerImage.setVisible(true);
+
+				} else {
+					// numberOfItemsText[0].setText("X " + player.numOfPumpkin);
+					// numberOfItemsText[1].setText("X " + player.numOfOnion);
+					// numberOfItemsText[2].setText("X " + player.numOfCabbage);
+					// numberOfItemsText[3].setText("X " + player.numOfCarrot);
+					numberOfItemsText[4].setText("X " + player.numOfPumpkin);
+					numberOfItemsText[5].setText("X " + player.numOfOnion);
+					numberOfItemsText[6].setText("X " + player.numOfCabbage);
+					numberOfItemsText[7].setText("X " + player.numOfCarrot);
+
+					inventoryWindow.setVisible(true);
+					playerImage.setVisible(false);
+				}
+
+				break;
 			}
 		}
 
