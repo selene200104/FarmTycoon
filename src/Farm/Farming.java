@@ -163,14 +163,22 @@ public class Farming {
 			
 			seedImage[i].setBounds(chooseSeedBoxLength, 10, 105, 100);
 			seedImage[i].setHorizontalAlignment(SwingConstants.CENTER);
-			seedImage[i].setIcon(new ImageIcon("./images/storeImage.png"));
 			
 			seedExplanationImage[i].setBounds(chooseSeedBoxLength, 110, 105, 160);
 			seedExplanationImage[i].setHorizontalAlignment(SwingConstants.CENTER);
 			seedExplanationImage[i].setIcon(new ImageIcon("./images/storeImage.png"));
 			
 			chooseSeedBoxLength = chooseSeedBoxLength + 124;
+			
+			seedImage[i].setFocusPainted(false);
+			seedImage[i].setContentAreaFilled(false);
+			//seedImage[i].setBorderPainted(false);
 		}
+		
+		seedImage[0].setIcon(new ImageIcon("./images/PumkinFieldImage.png"));
+		seedImage[1].setIcon(new ImageIcon("./images/OnionFieldImage.png"));
+		seedImage[2].setIcon(new ImageIcon("./images/CabbageFieldImage.png"));
+		seedImage[3].setIcon(new ImageIcon("./images/CarrotFieldImage.png"));
 		
 		seedImage[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -178,6 +186,7 @@ public class Farming {
 				if (player.energy <= 5) {
 					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
 				} else {
+					plantsImage[numOfField].setIcon(new ImageIcon("./images/PumkinFieldImage.png"));
 					plantsNametext[numOfField].setText("이름 : 호박");
 					timeLeftText[numOfField].setText("남은 일 수 : 4일");
 
@@ -194,6 +203,7 @@ public class Farming {
 				if (player.energy <= 5) {
 					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
 				} else {
+					plantsImage[numOfField].setIcon(new ImageIcon("./images/OnionFieldImage.png"));
 					plantsNametext[numOfField].setText("이름 : 양파");
 					timeLeftText[numOfField].setText("남은 일 수 : 2일");
 
@@ -210,6 +220,7 @@ public class Farming {
 				if (player.energy <= 5) {
 					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
 				} else {
+					plantsImage[numOfField].setIcon(new ImageIcon("./images/CabbageFieldImage.png"));
 					plantsNametext[numOfField].setText("이름 : 양배추");
 					timeLeftText[numOfField].setText("남은 일 수 : 3일");
 
@@ -226,6 +237,7 @@ public class Farming {
 				if (player.energy <= 5) {
 					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
 				} else {
+					plantsImage[numOfField].setIcon(new ImageIcon("./images/CarrotFieldImage.png"));
 					plantsNametext[numOfField].setText("이름 : 당근");
 					timeLeftText[numOfField].setText("남은 일 수 : 2일");
 
@@ -290,7 +302,6 @@ public class Farming {
 			plantStateWindow.add(amountOfWater[i] = new JLabel());
 			
 			plantsImage[i].setBounds(30,60, 80, 80);
-			plantsImage[i].setIcon(new ImageIcon("./images/seedFieldImage.png"));
 			
 			plantsNametext[i].setText("이름 : ");
 			plantsNametext[i].setFont(new Font("굴림", Font.BOLD, 15));
@@ -664,10 +675,11 @@ public class Farming {
 				}
 				
 				
-					//집에서 스페이스바를 눌렀을 때
+					//집안에서 스페이스바를 눌렀을 때
 				if (playerImage.getY() >= 330 && playerImage.getY() <= 475) {
 					if (playerImage.getX() >= 600 && playerImage.getY() <= 720) {
 
+						//하루가 지나간다
 						JOptionPane.showMessageDialog(null, "하루가 지나갑니다", " ", JOptionPane.INFORMATION_MESSAGE);
 						player.energy = 100;
 						playerEnergy.setText("남은 에너지 : " + player.energy);
@@ -675,11 +687,13 @@ public class Farming {
 						daysText.setText(day + "일차");
 
 						for (int i = 0; i < fieldImages.length; i++) {
+							
+							//밭의 상태가 적당한 상태라면
 							if (statusOfField.get(i).equals("Proper field")) {
 								daysRemaining[i]--;
 								timeLeftText[i].setText("남은 일 수 : " + daysRemaining[i]);
 
-								// 남은 일수가 0이라면
+								// 남은 일수에 따라 이미지 교체
 								if (daysRemaining[i] == 0) {
 									statusOfField.set(i, "fullGrown field");
 									
@@ -706,6 +720,22 @@ public class Farming {
 									fieldImages[i].setIcon(new ImageIcon("./images/Grown3FieldImage.png"));
 									
 								}
+								
+								//하루가 지난 후 일수가 남은 식물은 물을 추가로 줘야하도록 농작물의 상태를 바꿔주었다
+								if(daysRemaining[i] >= 1) {
+									
+									System.out.println(i);
+									statusOfField.set(i, "seeded field");
+									amountOfWater[i].setText("물의 양 : 부족");
+								}
+								
+								//밭이 물이 부족한 상태로 하루가 지나게 되면
+							}else if (statusOfField.get(i).equals("seeded field") ||
+									statusOfField.get(i).equals("need Water field")) {
+								
+								//썩은 밭이 된다
+								statusOfField.set(i, "rotten field");
+								fieldImages[i].setIcon(new ImageIcon("./images/rottenFieldImage.png"));
 							}
 						}
 					}
