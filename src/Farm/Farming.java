@@ -11,8 +11,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.ArrayList;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -45,12 +47,12 @@ public class Farming {
 	Player player = new Player();
 	SparrowObstruction sparrowObstruction = new SparrowObstruction();
 	
-	public JPanel farmingScene = new JPanel() {
-	/*	public void paintComponent(Graphics g) {
-			Dimension d = getSize();
-			ImageIcon image = new ImageIcon("./image/background.jpg");
-			g.drawImage(image.getImage(), 0, 0, d.width, d.height, this);
-		}*/
+	static JPanel farmingScene = new JPanel() {
+		//public void paintComponent(Graphics g) {
+		//	Dimension d = getSize();
+		//	ImageIcon image = new ImageIcon("./images/backGround.jpg");
+		//	g.drawImage(image.getImage(), 0, 0, d.width, d.height, this);
+		//}
 	};
 
 	static JLabel[] fieldImages = new JLabel[18];
@@ -117,7 +119,7 @@ public class Farming {
 		farmingScene.setLayout(null);
 
 		playerImage.setHorizontalAlignment(SwingConstants.CENTER);
-		playerImage.setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\rabbit.png"));
+		playerImage.setIcon(new ImageIcon("./images/rabbit.png"));
 		playerImage.setBounds(365, 338, 70, 80);
 		farmingScene.add(playerImage);
 		
@@ -132,17 +134,17 @@ public class Farming {
 		farmingScene.add(daysText);
 		
 		houseImage.setHorizontalAlignment(SwingConstants.CENTER);
-		houseImage.setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\houseImage.png"));
+		houseImage.setIcon(new ImageIcon("./images/houseImage.png"));
 		houseImage.setBounds(620, 400, 150, 150);
 		farmingScene.add(houseImage);
 
 		storeImage.setHorizontalAlignment(SwingConstants.CENTER);
-		storeImage.setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\storeImage.png"));
+		storeImage.setIcon(new ImageIcon("./images/storeImage.png"));
 		storeImage.setBounds(20, 400, 150, 150);
 		farmingScene.add(storeImage);
 		
 		sparrowImage.setHorizontalAlignment(SwingConstants.CENTER);
-		sparrowImage.setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\sparrow.png"));
+		sparrowImage.setIcon(new ImageIcon("./images/sparrow.png"));
 		sparrowImage.setBounds(-100, -100, 100, 50);
 		farmingScene.add(sparrowImage);
 		
@@ -161,11 +163,11 @@ public class Farming {
 			
 			seedImage[i].setBounds(chooseSeedBoxLength, 10, 105, 100);
 			seedImage[i].setHorizontalAlignment(SwingConstants.CENTER);
-			seedImage[i].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\storeImage.png"));
+			seedImage[i].setIcon(new ImageIcon("./images/storeImage.png"));
 			
 			seedExplanationImage[i].setBounds(chooseSeedBoxLength, 110, 105, 160);
 			seedExplanationImage[i].setHorizontalAlignment(SwingConstants.CENTER);
-			seedExplanationImage[i].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\storeImage.png"));
+			seedExplanationImage[i].setIcon(new ImageIcon("./images/storeImage.png"));
 			
 			chooseSeedBoxLength = chooseSeedBoxLength + 124;
 		}
@@ -176,10 +178,10 @@ public class Farming {
 				if (player.energy <= 5) {
 					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					plantsNametext[numOfField].setText("이름 : 파");
-					timeLeftText[numOfField].setText("남은 일 수 : 2일");
+					plantsNametext[numOfField].setText("이름 : 호박");
+					timeLeftText[numOfField].setText("남은 일 수 : 4일");
 
-					daysRemaining[numOfField] = 2;
+					daysRemaining[numOfField] = 4;
 					player.energy = player.energy - 5;
 					playerEnergy.setText("남은 에너지 : " + player.energy);
 				}
@@ -209,9 +211,9 @@ public class Farming {
 					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					plantsNametext[numOfField].setText("이름 : 양배추");
-					timeLeftText[numOfField].setText("남은 일 수 : 2일");
+					timeLeftText[numOfField].setText("남은 일 수 : 3일");
 
-					daysRemaining[numOfField] = 2;
+					daysRemaining[numOfField] = 3;
 					player.energy = player.energy - 5;
 					playerEnergy.setText("남은 에너지 : " + player.energy);
 				}
@@ -243,7 +245,7 @@ public class Farming {
 						if (e.getSource() == seedImage[i]) {
 							
 							if (statusOfField.get(numOfField).equals("empty Field")) {
-								fieldImages[numOfField].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\seedFieldImage.png"));
+								fieldImages[numOfField].setIcon(new ImageIcon("./images/seedFieldImage.png"));
 								statusOfField.set(numOfField, "seeded field");
 							}
 						}
@@ -288,7 +290,7 @@ public class Farming {
 			plantStateWindow.add(amountOfWater[i] = new JLabel());
 			
 			plantsImage[i].setBounds(30,60, 80, 80);
-			plantsImage[i].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\seedFieldImage.png"));
+			plantsImage[i].setIcon(new ImageIcon("./images/seedFieldImage.png"));
 			
 			plantsNametext[i].setText("이름 : ");
 			plantsNametext[i].setFont(new Font("굴림", Font.BOLD, 15));
@@ -361,7 +363,7 @@ public class Farming {
 							|| statusOfField.get(numOfField).equals("Proper field")) {
 						//성장한다
 						statusOfField.set(numOfField, "fullGrown field");
-						fieldImages[numOfField].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\fullGrownFieldImage.png"));
+						fieldImages[numOfField].setIcon(new ImageIcon("./images/fullGrownFieldImage.png"));
 					}
 				}else {
 					JOptionPane.showMessageDialog(null, "뼈의 개수가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
@@ -394,8 +396,8 @@ public class Farming {
 					//다 자란 농작물을 수확한다면
 					if(statusOfField.get(numOfField).equals("fullGrown field")) {
 						
-						if(plantsNametext[numOfField].getText().equals("이름 : 파")) {
-							player.numOfWelshonion++;
+						if(plantsNametext[numOfField].getText().equals("이름 : 호박")) {
+							player.numOfPumpkin++;
 							
 						}else if(plantsNametext[numOfField].getText().equals("이름 : 양파")) {
 							player.numOfOnion++;
@@ -409,7 +411,7 @@ public class Farming {
 					}
 					//다 자라지 않은 농작물을 수확한다면 농작물은 얻을 수 없으며 빈땅으로 되돌아간다
 					statusOfField.set(numOfField, "empty Field");
-					fieldImages[numOfField].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\basicsFieldImage.png"));
+					fieldImages[numOfField].setIcon(new ImageIcon("./images/basicsFieldImage.png"));
 
 					player.energy  = player.energy - 7;
 					playerEnergy.setText("남은 에너지 : " + player.energy);
@@ -456,7 +458,7 @@ public class Farming {
 			farmingScene.add(emergencyMarkingImages[i] = new JLabel());
 			farmingScene.add(fieldImages[i] = new JLabel());
 			
-			fieldImages[i].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\basicsFieldImage.png"));
+			fieldImages[i].setIcon(new ImageIcon("./images/basicsFieldImage.png"));
 
 			if (i < 6) {
 				fieldVerticalLength = 50;
@@ -479,7 +481,7 @@ public class Farming {
 			}
 			
 			emergencyMarkingImages[i].setBounds(fieldImages[i].getX() + 25, fieldImages[i].getY() + 25, 20, 20);
-			emergencyMarkingImages[i].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\EmergencyMarking.png"));
+			emergencyMarkingImages[i].setIcon(new ImageIcon("./images/EmergencyMarking.png"));
 			emergencyMarkingImages[i].setVisible(false);
 			
 			statusOfField.add("empty Field");
@@ -680,7 +682,7 @@ public class Farming {
 								// 남은 일수가 0이라면
 								if (daysRemaining[i] == 0) {
 									statusOfField.set(i, "fullGrown field");
-									fieldImages[i].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\fullGrownFieldImage.png"));
+									fieldImages[i].setIcon(new ImageIcon("./images/fullGrownFieldImage.png"));
 								}
 							}
 						}

@@ -48,7 +48,7 @@ public class RotCrops extends Thread{
 					
 					if(Farming.statusOfField.get(numOfField).equals("need Water field")) {
 						Farming.emergencyMarkingImages[numOfField].setVisible(false);
-						Farming.fieldImages[numOfField].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\πŸ≈¡ »≠∏È\\∆¿≥ÎπŸ\\java_teamProject\\rottenFieldImage.png"));
+						Farming.fieldImages[numOfField].setIcon(new ImageIcon("./images/rottenFieldImage.png"));
 						Farming.statusOfField.set(numOfField, "rotten field");
 					}
 					
