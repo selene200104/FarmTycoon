@@ -682,7 +682,29 @@ public class Farming {
 								// 남은 일수가 0이라면
 								if (daysRemaining[i] == 0) {
 									statusOfField.set(i, "fullGrown field");
-									fieldImages[i].setIcon(new ImageIcon("./images/fullGrownFieldImage.png"));
+									
+									if(plantsNametext[i].getText().equals("이름 : 호박")) {
+										fieldImages[i].setIcon(new ImageIcon("./images/PumKinFieldImage.png"));
+										
+									}else if(plantsNametext[i].getText().equals("이름 : 양파")) {
+										fieldImages[i].setIcon(new ImageIcon("./images/OnionFieldImage.png"));
+										
+									}else if(plantsNametext[i].getText().equals("이름 : 당근")) {
+										fieldImages[i].setIcon(new ImageIcon("./images/CarrotFieldImage.png"));
+										
+									}else if(plantsNametext[i].getText().equals("이름 : 양배추")) {
+										fieldImages[i].setIcon(new ImageIcon("./images/CabbageFieldImage.png"));
+										
+									}
+								}else if(daysRemaining[i] == 1) {
+									fieldImages[i].setIcon(new ImageIcon("./images/Grown1FieldImage.png"));
+									
+								}else if(daysRemaining[i] == 2) {
+									fieldImages[i].setIcon(new ImageIcon("./images/Grown2FieldImage.png"));
+									
+								}else if(daysRemaining[i] == 3) {
+									fieldImages[i].setIcon(new ImageIcon("./images/Grown3FieldImage.png"));
+									
 								}
 							}
 						}
