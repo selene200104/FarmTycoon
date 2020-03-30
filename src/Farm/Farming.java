@@ -103,6 +103,7 @@ public class Farming {
 	
 	//날짜
 	int day = 0;
+	int finalday = 7; // 마지막날
 	
 	private void initialize() {
 
@@ -686,56 +687,68 @@ public class Farming {
 						day++;
 						daysText.setText(day + "일차");
 
-						for (int i = 0; i < fieldImages.length; i++) {
-							
-							//밭의 상태가 적당한 상태라면
-							if (statusOfField.get(i).equals("Proper field")) {
-								daysRemaining[i]--;
-								timeLeftText[i].setText("남은 일 수 : " + daysRemaining[i]);
+						//마지막 날이라면 게임을 결과를 보여준다
+						if (day == finalday) {
 
-								// 남은 일수에 따라 이미지 교체
-								if (daysRemaining[i] == 0) {
-									statusOfField.set(i, "fullGrown field");
-									
-									if(plantsNametext[i].getText().equals("이름 : 호박")) {
-										fieldImages[i].setIcon(new ImageIcon("./images/PumKinFieldImage.png"));
-										
-									}else if(plantsNametext[i].getText().equals("이름 : 양파")) {
-										fieldImages[i].setIcon(new ImageIcon("./images/OnionFieldImage.png"));
-										
-									}else if(plantsNametext[i].getText().equals("이름 : 당근")) {
-										fieldImages[i].setIcon(new ImageIcon("./images/CarrotFieldImage.png"));
-										
-									}else if(plantsNametext[i].getText().equals("이름 : 양배추")) {
-										fieldImages[i].setIcon(new ImageIcon("./images/CabbageFieldImage.png"));
-										
+							if(player.money > 70000) {
+								System.out.println("게임 승리");
+								
+							}else {
+								System.out.println("게임 패배");
+							}
+							
+						} else {
+							for (int i = 0; i < fieldImages.length; i++) {
+
+								// 밭의 상태가 적당한 상태라면
+								if (statusOfField.get(i).equals("Proper field")) {
+									daysRemaining[i]--;
+									timeLeftText[i].setText("남은 일 수 : " + daysRemaining[i]);
+
+									// 남은 일수에 따라 이미지 교체
+									if (daysRemaining[i] == 0) {
+										statusOfField.set(i, "fullGrown field");
+
+										if (plantsNametext[i].getText().equals("이름 : 호박")) {
+											fieldImages[i].setIcon(new ImageIcon("./images/PumKinFieldImage.png"));
+
+										} else if (plantsNametext[i].getText().equals("이름 : 양파")) {
+											fieldImages[i].setIcon(new ImageIcon("./images/OnionFieldImage.png"));
+
+										} else if (plantsNametext[i].getText().equals("이름 : 당근")) {
+											fieldImages[i].setIcon(new ImageIcon("./images/CarrotFieldImage.png"));
+
+										} else if (plantsNametext[i].getText().equals("이름 : 양배추")) {
+											fieldImages[i].setIcon(new ImageIcon("./images/CabbageFieldImage.png"));
+
+										}
+									} else if (daysRemaining[i] == 1) {
+										fieldImages[i].setIcon(new ImageIcon("./images/Grown1FieldImage.png"));
+
+									} else if (daysRemaining[i] == 2) {
+										fieldImages[i].setIcon(new ImageIcon("./images/Grown2FieldImage.png"));
+
+									} else if (daysRemaining[i] == 3) {
+										fieldImages[i].setIcon(new ImageIcon("./images/Grown3FieldImage.png"));
+
 									}
-								}else if(daysRemaining[i] == 1) {
-									fieldImages[i].setIcon(new ImageIcon("./images/Grown1FieldImage.png"));
-									
-								}else if(daysRemaining[i] == 2) {
-									fieldImages[i].setIcon(new ImageIcon("./images/Grown2FieldImage.png"));
-									
-								}else if(daysRemaining[i] == 3) {
-									fieldImages[i].setIcon(new ImageIcon("./images/Grown3FieldImage.png"));
-									
+
+									// 하루가 지난 후 일수가 남은 식물은 물을 추가로 줘야하도록 농작물의 상태를 바꿔주었다
+									if (daysRemaining[i] >= 1) {
+
+										System.out.println(i);
+										statusOfField.set(i, "seeded field");
+										amountOfWater[i].setText("물의 양 : 부족");
+									}
+
+									// 밭이 물이 부족한 상태로 하루가 지나게 되면
+								} else if (statusOfField.get(i).equals("seeded field")
+										|| statusOfField.get(i).equals("need Water field")) {
+
+									// 썩은 밭이 된다
+									statusOfField.set(i, "rotten field");
+									fieldImages[i].setIcon(new ImageIcon("./images/rottenFieldImage.png"));
 								}
-								
-								//하루가 지난 후 일수가 남은 식물은 물을 추가로 줘야하도록 농작물의 상태를 바꿔주었다
-								if(daysRemaining[i] >= 1) {
-									
-									System.out.println(i);
-									statusOfField.set(i, "seeded field");
-									amountOfWater[i].setText("물의 양 : 부족");
-								}
-								
-								//밭이 물이 부족한 상태로 하루가 지나게 되면
-							}else if (statusOfField.get(i).equals("seeded field") ||
-									statusOfField.get(i).equals("need Water field")) {
-								
-								//썩은 밭이 된다
-								statusOfField.set(i, "rotten field");
-								fieldImages[i].setIcon(new ImageIcon("./images/rottenFieldImage.png"));
 							}
 						}
 					}

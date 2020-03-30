@@ -4,6 +4,7 @@ public class Player {
 
 	public int speed = 5;
 	public int energy = 100;
+	public int money = 0;
 	
 	public int numOfPumpkin = 0; //가지고 있는 호박의 수
 	public int numOfOnion = 0; //가지고 있는 양파의 수 
