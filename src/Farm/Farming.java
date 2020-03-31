@@ -235,13 +235,12 @@ public class Farming {
 			}
 
 			inventoryCompartment[i].setHorizontalAlignment(SwingConstants.CENTER);
-			inventoryCompartment[i].setIcon(new ImageIcon("./images/inventory.png"));
 			
 			numberOfItemsText[i].setHorizontalAlignment(SwingConstants.CENTER);
 			numberOfItemsText[i].setText("X 0");
 		}
 		
-		//인벤토리 칸에 들어가는 이미지 초기화
+		//인벤토리 칸에 들어가는 이미지와 개수 초기화
 		inventoryCompartment[0].setIcon(new ImageIcon("./images/PumkinSeed_inventory.png"));
 		inventoryCompartment[1].setIcon(new ImageIcon("./images/OnionSeed_inventory.png"));
 		inventoryCompartment[2].setIcon(new ImageIcon("./images/CabbageSeed_inventory.png"));
@@ -250,12 +249,12 @@ public class Farming {
 		inventoryCompartment[5].setIcon(new ImageIcon("./images/Onion_inventory.png"));
 		inventoryCompartment[6].setIcon(new ImageIcon("./images/Cabbage_inventory.png"));
 		inventoryCompartment[7].setIcon(new ImageIcon("./images/Carrot_inventory.png"));
-		/*inventoryCompartment[8].setIcon(new ImageIcon("./images/PumkinFieldImage.png"));
-		inventoryCompartment[9].setIcon(new ImageIcon("./images/OnionFieldImage.png"));
-		inventoryCompartment[10].setIcon(new ImageIcon("./images/CabbageFieldImage.png"));
-		inventoryCompartment[11].setIcon(new ImageIcon("./images/CarrotFieldImage.png"));
-		inventoryCompartment[12].setIcon(new ImageIcon("./images/PumkinFieldImage.png"));
-		inventoryCompartment[13].setIcon(new ImageIcon("./images/OnionFieldImage.png"));
+		inventoryCompartment[8].setIcon(new ImageIcon("./images/portion+30.png"));
+		inventoryCompartment[9].setIcon(new ImageIcon("./images/portion+50.png"));
+		numberOfItemsText[10].setText("");
+		numberOfItemsText[11].setText("");
+		inventoryCompartment[12].setIcon(new ImageIcon("./images/randomMushroom.png"));
+		/*inventoryCompartment[13].setIcon(new ImageIcon("./images/OnionFieldImage.png"));
 		inventoryCompartment[14].setIcon(new ImageIcon("./images/CabbageFieldImage.png"));
 		inventoryCompartment[15].setIcon(new ImageIcon("./images/CarrotFieldImage.png"));
 		*/
