@@ -77,46 +77,43 @@ public class Farming {
 	
 	
 	static JLabel[] fieldImages = new JLabel[18];
-	static JLabel[] emergencyMarkingImages = new JLabel[18]; //물이 필요하다는 긴급표시
+	static JLabel[] emergencyMarkingImages = new JLabel[18]; //물이 부족하다는 긴급표시 image
 	static JLabel playerImage = new JLabel();
 	static JLabel houseImage = new JLabel();
 	JLabel storeImage = new JLabel();
-	JLabel playerEnergyText = new JLabel();
+	JLabel EnergyText = new JLabel();
 	JLabel daysText = new JLabel();
 	JLabel moneyText = new JLabel();
 	JLabel successText = new JLabel();
 	JLabel failText = new JLabel();
-	JLabel successmoneyEarned = new JLabel();
-	JLabel failmoneyEarned = new JLabel();
+	JLabel successmoneyEarned = new JLabel(); //이겼을 때 남은 돈이 얼마인지 나타내주는 text
+	JLabel failmoneyEarned = new JLabel(); //졌을 때 남은 돈이 얼마인지 나타내주는 text
 	
-	JButton[] chooseSeedImage = new JButton[4];
-	JButton chooseSeedCanelButton = new JButton();
-	
-	//식물 상태창 
-	static JLabel[] amountOfWater = new JLabel[18];
+	//식물 상태 창
+	static JLabel[] amountOfWater = new JLabel[18]; //밭의 물의 상태가 어떠한지 text
 	JLabel[] plantsImage = new JLabel[18];
 	JLabel[] plantsNametext = new JLabel[18];
 	JLabel[] timeLeftText = new JLabel[18];
-	JButton waterThePlantsButton = new JButton();
-	JButton rapidGrowthButton = new JButton();
-	JButton harvestingButton = new JButton();
-	JButton statusCheckCanelButton = new JButton();
 	
 	//인벤토리
 	JLabel inventoryWindow = new JLabel();
 	JLabel[] inventoryCompartment = new JLabel[16]; //인벤토리 칸
 	JLabel[] numberOfItemsText = new JLabel[16]; //물품이 몇개있지 text
 	JLabel[] inventoryDescriptionText = new JLabel[4]; //인벤토리 설명 (어떤 칸인지)
-	int inventoryHorizontalLength = 5;
-	int inventoryVerticalLength = 0;
-	int inventoryInterval = 126;
-	int inventoryWidth = 100;
-	int inventoryHeight = 60;
-	int inventoryDescriptionlength = 0;
 	
 	//참새
 	static JLabel sparrowImage = new JLabel();
 	
+	//씨앗 선택 창 
+	JButton[] chooseSeedImage = new JButton[4];
+	JButton chooseSeedCanelButton = new JButton();
+	
+	//식물 상태 창 
+	JButton waterThePlantsButton = new JButton(); //물주기 button
+	JButton rapidGrowthButton = new JButton(); //급속성장 button
+	JButton harvestingButton = new JButton(); //수확하기 button
+	JButton statusCheckCanelButton = new JButton(); 
+
 	//밭
 	static ArrayList<String> statusOfField = new ArrayList<>();
 	int numOfField = 0;
@@ -125,6 +122,14 @@ public class Farming {
 	int fieldHorizontalLength = 90;
 	int fieldVerticalLength = 50;
 	int fieldInterval = 100;
+	
+	//인벤토리 
+	int inventoryHorizontalLength = 5;
+	int inventoryVerticalLength = 0;
+	int inventoryInterval = 126;
+	int inventoryWidth = 100;
+	int inventoryHeight = 60;
+	int inventoryDescriptionlength = 0;
 	
 	//벽
 	int rightWall = 725;
@@ -160,10 +165,10 @@ public class Farming {
 		playerImage.setBounds(365, 338, 70, 80);
 		farmingScene.add(playerImage);
 		
-		playerEnergyText.setText("남은 에너지 : 100");
-		playerEnergyText.setFont(new Font("굴림", Font.BOLD, 15));
-		playerEnergyText.setBounds(650, -35, 150, 150);
-		farmingScene.add(playerEnergyText);
+		EnergyText.setText("남은 에너지 : 100");
+		EnergyText.setFont(new Font("굴림", Font.BOLD, 15));
+		EnergyText.setBounds(650, -35, 150, 150);
+		farmingScene.add(EnergyText);
 		
 		daysText.setText("0일차");
 		daysText.setFont(new Font("굴림", Font.BOLD, 15));
@@ -197,6 +202,7 @@ public class Farming {
 		inventoryWindow.setVisible(false);
 		farmingScene.add(inventoryWindow);
 		
+		//인벤토리 칸, 개수text 위치 초기화
 		for (int i = 0; i < inventoryCompartment.length; i++) {
 			inventoryWindow.add(numberOfItemsText[i] = new JLabel());
 			inventoryWindow.add(inventoryCompartment[i] = new JLabel());
@@ -234,6 +240,7 @@ public class Farming {
 			numberOfItemsText[i].setText("X 0");
 		}
 		
+		//인벤토리 칸에 들어가는 이미지 초기화
 		inventoryCompartment[0].setIcon(new ImageIcon("./images/PumkinSeed_inventory.png"));
 		inventoryCompartment[1].setIcon(new ImageIcon("./images/OnionSeed_inventory.png"));
 		inventoryCompartment[2].setIcon(new ImageIcon("./images/CabbageSeed_inventory.png"));
@@ -252,6 +259,7 @@ public class Farming {
 		inventoryCompartment[15].setIcon(new ImageIcon("./images/CarrotFieldImage.png"));
 		*/
 		
+		//인벤토리 설명 초기화
 		for (int i = 0; i < inventoryDescriptionText.length; i++) {
 			inventoryWindow.add(inventoryDescriptionText[i] = new JLabel());
 			
@@ -289,6 +297,7 @@ public class Farming {
 		chooseSeedImage[2].setIcon(new ImageIcon("./images/chooseCabbageSeedExplanation.png"));
 		chooseSeedImage[3].setIcon(new ImageIcon("./images/chooseCarrotSeedExplanation.png"));
 		
+		//호박을 선택했을 때 
 		chooseSeedImage[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -299,7 +308,7 @@ public class Farming {
 					JOptionPane.showMessageDialog(null, "호박씨가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
 					
 				}else {
-				
+					//선택한 밭의 정보가 호박으로 바뀐다
 					plantsImage[numOfField].setIcon(new ImageIcon("./images/PumkinFieldImage.png"));
 					plantsNametext[numOfField].setText("이름 : 호박");
 					timeLeftText[numOfField].setText("남은 일 수 : 4일");
@@ -307,7 +316,7 @@ public class Farming {
 					player.numOfPumpkinSeed--;
 					daysRemaining[numOfField] = 4;
 					player.energy = player.energy - 5;
-					playerEnergyText.setText("남은 에너지 : " + player.energy);
+					EnergyText.setText("남은 에너지 : " + player.energy);
 				}
 			}
 		});
@@ -329,7 +338,7 @@ public class Farming {
 					player.numOfOnionSeed--;
 					daysRemaining[numOfField] = 2;
 					player.energy = player.energy - 5;
-					playerEnergyText.setText("남은 에너지 : " + player.energy);
+					EnergyText.setText("남은 에너지 : " + player.energy);
 				}
 			}
 		});
@@ -351,7 +360,7 @@ public class Farming {
 					player.numOfCabbageSeed--;
 					daysRemaining[numOfField] = 3;
 					player.energy = player.energy - 5;
-					playerEnergyText.setText("남은 에너지 : " + player.energy);
+					EnergyText.setText("남은 에너지 : " + player.energy);
 				}
 			}
 		});
@@ -373,7 +382,7 @@ public class Farming {
 					player.numOfCarrotSeed--;
 					daysRemaining[numOfField] = 2;
 					player.energy = player.energy - 5;
-					playerEnergyText.setText("남은 에너지 : " + player.energy);
+					EnergyText.setText("남은 에너지 : " + player.energy);
 				}
 			}
 		});
@@ -393,6 +402,7 @@ public class Farming {
 						}
 					}
 					
+					//씨앗을 선택할때 보이지 않게 해 놓았던 것을 다시 보이게 했다
 					for (int j = 0; j < fieldImages.length; j++) {
 						fieldImages[j].setEnabled(true);
 					}
@@ -424,6 +434,7 @@ public class Farming {
 		plantStateWindow.setVisible(false);
 		farmingScene.add(plantStateWindow);
 
+		//농작물의 이름, 남은 일 수, 자라는데 필요한 물의 양 text를 초기화
 		for (int i = 0; i < fieldImages.length; i++) {
 			
 			plantStateWindow.add(plantsImage[i] = new JLabel());
@@ -472,9 +483,10 @@ public class Farming {
 					}
 
 					player.energy = player.energy - 3;
-					playerEnergyText.setText("남은 에너지 : " + player.energy);
+					EnergyText.setText("남은 에너지 : " + player.energy);
 				}
 				
+				//씨앗 상태창을 선택할때 보이지 않게 해 놓았던 것을 다시 보이게 했다
 				plantStateWindow.setVisible(false);	
 				playerImage.setVisible(true);
 				
@@ -502,7 +514,8 @@ public class Farming {
 					if(statusOfField.get(numOfField).equals("seeded field")
 							|| statusOfField.get(numOfField).equals("need Water field")
 							|| statusOfField.get(numOfField).equals("Proper field")) {
-						//성장한다
+						
+						//급속성할 밭이 썩은 밭이나 빈 밭이 아니랄면 해당 밭을 성장시킨다.
 						statusOfField.set(numOfField, "fullGrown field");
 						
 						if (plantsNametext[numOfField].getText().equals("이름 : 호박")) {
@@ -547,7 +560,7 @@ public class Farming {
 					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
 				}else {
 					
-					//다 자란 농작물을 수확한다면
+					//다 자란 농작물을 수확한다면 해당 농작물을 얻는다.
 					if(statusOfField.get(numOfField).equals("fullGrown field")) {
 						
 						if(plantsNametext[numOfField].getText().equals("이름 : 호박")) {
@@ -568,7 +581,7 @@ public class Farming {
 					fieldImages[numOfField].setIcon(new ImageIcon("./images/basicsFieldImage.png"));
 
 					player.energy  = player.energy - 7;
-					playerEnergyText.setText("남은 에너지 : " + player.energy);
+					EnergyText.setText("남은 에너지 : " + player.energy);
 				}
 				
 				plantStateWindow.setVisible(false);	
@@ -678,6 +691,8 @@ public class Farming {
 		failmoneyEarned.setBounds(0, 200, 800, 300);
 		gameFail.add(failmoneyEarned);
 		
+		//마우스로 집이나 밭을 클릭했을 때 플레이어가 자동으로 집이나 밭으로 이동한다.
+		//오류가 있어 보류했다.
 		/*
 		for (int i = 0; i < fieldImages.length; i++) {
 			fieldImages[i].addMouseListener(new MouseAdapter() {
@@ -704,6 +719,7 @@ public class Farming {
             }          
         });
 */
+		
 		sparrowObstruction.start();
 		frame.addKeyListener(new key());
 		frame.setFocusable(true);
@@ -724,6 +740,7 @@ public class Farming {
 
 			switch (keyCode) {
 
+			//플레이어 이동
 			case KeyEvent.VK_UP:
 			case KeyEvent.VK_W:
 				if (playerImage.getY() >= upperWall) {
@@ -755,6 +772,10 @@ public class Farming {
 				
 			case KeyEvent.VK_SPACE:
 				
+				//밭안(밭 앞)에서 스페이스바를 할 경우 씨앗 선택창또는  식물상태창 볼 수 있다.
+				//상점, 집안(앞)에서 스페이스 바를 할 경우 상점에 들어가거나 하루를 지나가게 할 수 있다.
+
+				//밭 안에서 스페이스바를 했을 때
 					// 밭의 첫번째 줄
 					if (playerImage.getY() <= 54) {
 
@@ -812,7 +833,7 @@ public class Farming {
 							information();
 
 						}
-
+						//3번째 줄
 					} else if (playerImage.getY() >= 160 && playerImage.getY() <= 235) {
 
 						if (playerImage.getX() >= 70 && playerImage.getX() <= 120) {
@@ -858,7 +879,7 @@ public class Farming {
 						//하루가 지나간다
 						JOptionPane.showMessageDialog(null, "하루가 지나갑니다", " ", JOptionPane.INFORMATION_MESSAGE);
 						player.energy = 100;
-						playerEnergyText.setText("남은 에너지 : " + player.energy);
+						EnergyText.setText("남은 에너지 : " + player.energy);
 						day++;
 						daysText.setText(day + "일차");
 
@@ -947,6 +968,7 @@ public class Farming {
 			case KeyEvent.VK_E:
 				
 				//인벤토리 보기
+				
 				if (inventoryWindow.isVisible() == true) {
 					inventoryWindow.setVisible(false);
 					playerImage.setVisible(true);
@@ -976,7 +998,7 @@ public class Farming {
 	}
 	
 	public void information(){
-
+		
 		//비어있는 땅이라면 씨앗심기창을 보여준다
 		if (statusOfField.get(numOfField).equals("empty Field")) {
 			seedPlantingWindow.setVisible(true);
