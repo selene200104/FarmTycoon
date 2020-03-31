@@ -27,7 +27,8 @@ public class Main extends JFrame {
 			}
 		});
 	}
-
+	static int day = 1;
+	static int energy = 50;
 	/**
 	 * Create the frame.
 	 */
@@ -38,15 +39,17 @@ public class Main extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
-		
-		JPanel dungeonWildBear = new DungeonWildBear();
-		dungeonWildBear.setVisible(false);
-		getContentPane().add(dungeonWildBear);
 
 		btnNewButton = new JButton("New button");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+			
+				JPanel dungeonWildBear = new DungeonWildBear();
+				dungeonWildBear.setVisible(false);
+				getContentPane().add(dungeonWildBear);
+				Player2.hp = 100;
+				//DungeonWildBear.wildBearHp = 110;
+				//dungeonWildBear.wildBear.hp = 100;
 				//JPanel dungeonWildBear = new DungeonWildBear();
 				dungeonWildBear.setVisible(true);
 				btnNewButton.setVisible(false);

@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -22,15 +23,17 @@ public class DungeonWildBear extends JPanel {
 	private JButton runAwayButton;
 	private JButton attackButton;
 
-	int day = 1;
-	int energy = 100;
+	
+	//int energy = 100;
+	//static int wildBearHp = 100;
 
-	static int randomMushroom;
-	static int randomItem;
-	static int numOfRun;
+	static int randomMushroom;	
+	static int randomItem;	//랜덤으로 받을 수 있는 아이템의 번호
+	static int numOfRun;	//도망칠 수 있는 랜덤 번호
 	static int numOfRandomMushroom = 2;
 	static int numOfBone = 1;
 	static int money;
+	//static int wildBearHp = 110;
 
 	static Random randomMushroomSelect = new Random();
 	static Random randomItemSelect = new Random();
@@ -46,18 +49,20 @@ public class DungeonWildBear extends JPanel {
 		randomItem = randomItemSelect.nextInt(3);
 	}
 
-	// 도망을 가기를 랜덤함수
+	// 도망갈 수 있는 번호를 정해주는 랜덤함수
 	public static void randomRun() {
 		numOfRun = randomRun.nextInt(5);
 	}
 
 	public DungeonWildBear() {
+		//System.out.println("오늘은 " + Main.day + "일입니다. 플레이어 체력은 " + Main.energy + "입니다.");
+		//System.out.println("곰 체력"+wildBearHp);
 		setLayout(null);
 		setBounds(0, 0, 800, 600);
 		setBackground(Color.black);
 		
 		WildAnimal wildBear = new WildAnimal("야생곰", 100, 10, true);
-
+		
 		JLabel wildBearImage = new JLabel();
 		wildBearImage.setHorizontalAlignment(SwingConstants.CENTER);
 		wildBearImage.setIcon(new ImageIcon("./images/wildbear.png"));
@@ -73,49 +78,53 @@ public class DungeonWildBear extends JPanel {
 		scrollBar.setBounds(68, 218, 662, 216);
 		scrollBar.getVerticalScrollBar().setValue(scrollBar.getVerticalScrollBar().getMaximum());
 		add(scrollBar);
-
+		
 		// 야생공 자동 동격 쓰레드
 		new Thread(new Runnable() {
 			public void run() {
 				try {
+					//boolean isStop = true;
 					do {
-						Thread.sleep(3000);
+						Thread.sleep(1000);
 						wildBearAttack();
-					} while (wildBear.hp > 0 && Player2.hp > 0);
+						//System.out.println("공격중");
+					} while (Player2.hp > 0 && wildBear.hp > 0);
 				} catch (Exception ie) {
 					ie.printStackTrace();
 				}
 			}
+		private void wildBearAttack() {
+			{
+				if (wildBear.hp > 0) {
+					Player2.hp = Player2.hp - wildBear.power;
+					textArea.append("야생곰이 공격하였습니다! (플레이어의 남은 피: " + Player2.hp + ")\n");
+					scrollBar.getVerticalScrollBar().setValue(scrollBar.getVerticalScrollBar().getMaximum());
 
-			private void wildBearAttack() {
-				{
-					if (wildBear.hp > 0) {
-						Player2.hp = Player2.hp - wildBear.power;
-						textArea.append("야생곰이 공격하였습니다! (남은 플레이어 체력: " + Player2.hp + ")\n");
-						scrollBar.getVerticalScrollBar().setValue(scrollBar.getVerticalScrollBar().getMaximum());
+					// 게임에 지면 다음날로 바뀌고, 플레이어의 체력이 50으로 시작한다.
+					if (Player2.hp == 0) {
+						Main.day ++;
+						Main.energy = 50;
+						//System.out.println("오늘은 " + Main.day + "일입니다. 플레이어 체력은 " + Main.energy + "입니다.");
+						
 
-						// 게임에 지면 다음날로 바뀌고, 플레이어의 체력이 50으로 시작한다.
-						if (Player2.hp == 0) {
-							day = day + 1;
-							energy = 50;
-							System.out.println("오늘은 " + day + "일입니다. 플레이어 체력은 " + energy + "입니다.");
-
-							try {
-								Thread.sleep(1000);
-								Player2.hp = 100;
-								wildBear.hp = 100;
-								textArea.selectAll();
-								textArea.replaceSelection("");
-								setVisible(false);
-								//Main.dungeonWildBear.setVisible(true);
-								// dungeonEx.setVisible(true);
-							} catch (Exception ie) {
-								ie.printStackTrace();
-							}
-						}
+						//try {
+							//Thread.sleep(1000);
+							//Player2.hp = 100;
+							//wildBear.hp = 100;
+							textArea.selectAll();
+							textArea.replaceSelection("");
+							setVisible(false);
+							//interrupt();
+							Main.btnNewButton.setVisible(true);
+							//Main.dungeonWildBear.setVisible(true);
+							// dungeonEx.setVisible(true);
+						//} catch (Exception ie) {
+						//	ie.printStackTrace();
+						//}
 					}
 				}
 			}
+		}
 		}).start();
 
 		attackButton = new JButton("공격하기");
@@ -139,40 +148,55 @@ public class DungeonWildBear extends JPanel {
 							// System.out.println("랜덤 버섯 받기 전 갯수: " +numOfRandomMushroom);
 							// System.out.println("돈 받기 전 소유머니: " +money);
 							if (randomItem == 0) {
-								textArea.append("SYSTEM: 뼛가루를 받았습니다! \n");
+								//textArea.append("SYSTEM: 뼛가루를 받았습니다! \n");
 								numOfBone++;
 
 								try {
-									// textArea.append("SYSTEM: 뼛가루를 받았습니다! \n");
 									Thread.sleep(1000);
-									Player2.hp = 100;
-									wildBear.hp = 100;
 									textArea.selectAll();
 									textArea.replaceSelection("");
 									setVisible(false);
-									// dungeonEx.setVisible(true);
 								} catch (Exception ie) {
 									ie.printStackTrace();
 								}
+								
 								Main.btnNewButton.setVisible(true);
-								// System.out.println("뼛가루 받은 후 갯수: " +numOfBone);
+								JOptionPane.showMessageDialog(null, "뼛가루를 받았습니다", "SYSTEM", JOptionPane.INFORMATION_MESSAGE);
+
+								//System.out.println("뼛가루 받은 후 갯수: " +numOfBone);
 							} else if (randomItem == 1) {
-								textArea.append("SYSTEM: 랜덤버섯을 받았습니다! \n");
+								//textArea.append("SYSTEM: 랜덤버섯을 받았습니다! \n");
 								numOfRandomMushroom++;
-								// System.out.println("랜덤 버섯 받은 후 갯수: " +numOfRandomMushroom);
+								
+								try {
+									Thread.sleep(1000);
+									textArea.selectAll();
+									textArea.replaceSelection("");
+									setVisible(false);
+								} catch (Exception ie) {
+									ie.printStackTrace();
+								}
+								
+								System.out.println("랜덤 버섯 받은 후 갯수: " +numOfRandomMushroom);
+								JOptionPane.showMessageDialog(null, "랜덤버섯을 받았습니다", "SYSTEM", JOptionPane.INFORMATION_MESSAGE);
+
 								Main.btnNewButton.setVisible(true);
 							} else if (randomItem == 2) {
-								textArea.append("SYSTEM: 돈을 받았습니다! \n");
-								// System.out.println("돈 받은 후 소유 머니: " +money);
+								//textArea.append("SYSTEM: 돈을 받았습니다! \n");
 								money = money + 1000;
-								// System.out.println("돈: " +money);
-								/*
-								 * try { Thread.sleep(1000); Player.hp = 100; wildBear.hp = 100;
-								 * textArea.selectAll(); textArea.replaceSelection("");
-								 * dungeonWildBear.setVisible(false); dungeonEx.setVisible(true); }catch
-								 * (Exception ie) { ie.printStackTrace(); }
-								 */
+								System.out.println("돈 받은 후 소유 머니: " +money);
+								
+								try {
+									Thread.sleep(1000);
+									textArea.selectAll();
+									textArea.replaceSelection("");
+									setVisible(false);
+								} catch (Exception ie) {
+									ie.printStackTrace();
+								}
+								
 								Main.btnNewButton.setVisible(true);
+								JOptionPane.showMessageDialog(null, "돈을 받았습니다", "SYSTEM", JOptionPane.INFORMATION_MESSAGE);
 							}
 						}
 
@@ -233,13 +257,16 @@ public class DungeonWildBear extends JPanel {
 						randomRun();
 
 						if (numOfRun == 0) {
-							Player2.hp = 100;
-							wildBear.hp = 100;
+							//wildBear.hp = wildBear.hp-wildBear.hp ;
+							wildBear.hp = 0;						
+							System.out.println("도망갈때 곰 체력: "+wildBear.hp);
 							textArea.selectAll();
 							textArea.replaceSelection("");
 							setVisible(false);
 							Main.btnNewButton.setVisible(true);
 							
+							//Player2.hp  = 100;
+							//wildBear.hp = 100;
 						} else {
 							textArea.append("도망가기에 실패하였습니다! \n");
 						}
@@ -247,6 +274,7 @@ public class DungeonWildBear extends JPanel {
 				}
 			}
 		});
+		
 		runAwayButton.setBounds(562, 458, 168, 47);
 		add(runAwayButton);
 	}
