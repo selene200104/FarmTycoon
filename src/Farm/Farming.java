@@ -81,7 +81,7 @@ public class Farming {
 	static JLabel playerImage = new JLabel();
 	static JLabel houseImage = new JLabel();
 	JLabel storeImage = new JLabel();
-	JLabel playerEnergy = new JLabel();
+	JLabel playerEnergyText = new JLabel();
 	JLabel daysText = new JLabel();
 	JLabel[] seedExplanationImage = new JLabel[4];
 	JLabel successText = new JLabel();
@@ -150,6 +150,7 @@ public class Farming {
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
 
+		//농사 화면
 		farmingScene.setBounds(0, 0, 800, 600);
 		frame.getContentPane().add(farmingScene);
 		farmingScene.setLayout(null);
@@ -159,10 +160,10 @@ public class Farming {
 		playerImage.setBounds(365, 338, 70, 80);
 		farmingScene.add(playerImage);
 		
-		playerEnergy.setText("남은 에너지 : 100");
-		playerEnergy.setFont(new Font("굴림", Font.BOLD, 15));
-		playerEnergy.setBounds(650, -35, 150, 150);
-		farmingScene.add(playerEnergy);
+		playerEnergyText.setText("남은 에너지 : 100");
+		playerEnergyText.setFont(new Font("굴림", Font.BOLD, 15));
+		playerEnergyText.setBounds(650, -35, 150, 150);
+		farmingScene.add(playerEnergyText);
 		
 		daysText.setText("0일차");
 		daysText.setFont(new Font("굴림", Font.BOLD, 15));
@@ -306,7 +307,7 @@ public class Farming {
 					player.numOfPumpkinSeed--;
 					daysRemaining[numOfField] = 4;
 					player.energy = player.energy - 5;
-					playerEnergy.setText("남은 에너지 : " + player.energy);
+					playerEnergyText.setText("남은 에너지 : " + player.energy);
 				}
 			}
 		});
@@ -328,7 +329,7 @@ public class Farming {
 					player.numOfOnionSeed--;
 					daysRemaining[numOfField] = 2;
 					player.energy = player.energy - 5;
-					playerEnergy.setText("남은 에너지 : " + player.energy);
+					playerEnergyText.setText("남은 에너지 : " + player.energy);
 				}
 			}
 		});
@@ -350,7 +351,7 @@ public class Farming {
 					player.numOfCabbageSeed--;
 					daysRemaining[numOfField] = 3;
 					player.energy = player.energy - 5;
-					playerEnergy.setText("남은 에너지 : " + player.energy);
+					playerEnergyText.setText("남은 에너지 : " + player.energy);
 				}
 			}
 		});
@@ -372,7 +373,7 @@ public class Farming {
 					player.numOfCarrotSeed--;
 					daysRemaining[numOfField] = 2;
 					player.energy = player.energy - 5;
-					playerEnergy.setText("남은 에너지 : " + player.energy);
+					playerEnergyText.setText("남은 에너지 : " + player.energy);
 				}
 			}
 		});
@@ -471,7 +472,7 @@ public class Farming {
 					}
 
 					player.energy = player.energy - 3;
-					playerEnergy.setText("남은 에너지 : " + player.energy);
+					playerEnergyText.setText("남은 에너지 : " + player.energy);
 				}
 				
 				plantStateWindow.setVisible(false);	
@@ -567,7 +568,7 @@ public class Farming {
 					fieldImages[numOfField].setIcon(new ImageIcon("./images/basicsFieldImage.png"));
 
 					player.energy  = player.energy - 7;
-					playerEnergy.setText("남은 에너지 : " + player.energy);
+					playerEnergyText.setText("남은 에너지 : " + player.energy);
 				}
 				
 				plantStateWindow.setVisible(false);	
@@ -857,7 +858,7 @@ public class Farming {
 						//하루가 지나간다
 						JOptionPane.showMessageDialog(null, "하루가 지나갑니다", " ", JOptionPane.INFORMATION_MESSAGE);
 						player.energy = 100;
-						playerEnergy.setText("남은 에너지 : " + player.energy);
+						playerEnergyText.setText("남은 에너지 : " + player.energy);
 						day++;
 						daysText.setText(day + "일차");
 
@@ -945,6 +946,7 @@ public class Farming {
 				
 			case KeyEvent.VK_E:
 				
+				//인벤토리 보기
 				if (inventoryWindow.isVisible() == true) {
 					inventoryWindow.setVisible(false);
 					playerImage.setVisible(true);
