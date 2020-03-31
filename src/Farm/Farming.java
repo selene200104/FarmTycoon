@@ -83,6 +83,7 @@ public class Farming {
 	JLabel storeImage = new JLabel();
 	JLabel playerEnergyText = new JLabel();
 	JLabel daysText = new JLabel();
+	JLabel moneyText = new JLabel();
 	JLabel[] seedExplanationImage = new JLabel[4];
 	JLabel successText = new JLabel();
 	JLabel failText = new JLabel();
@@ -169,6 +170,11 @@ public class Farming {
 		daysText.setFont(new Font("±¼¸²", Font.BOLD, 15));
 		daysText.setBounds(650, -35, 100, 100);
 		farmingScene.add(daysText);
+		
+		moneyText.setText("µ· : 0");
+		moneyText.setFont(new Font("±¼¸²", Font.BOLD, 15));
+		moneyText.setBounds(10, -35, 100, 100);
+		farmingScene.add(moneyText);
 		
 		houseImage.setHorizontalAlignment(SwingConstants.CENTER);
 		houseImage.setIcon(new ImageIcon("./images/houseImage.png"));
@@ -939,7 +945,7 @@ public class Farming {
 				if (playerImage.getY() >= 328 && playerImage.getY() <= 473) {
 					if (playerImage.getX() >= 0 && playerImage.getX() <= 120) {
 						System.out.println("»óÁ¡À¸·Î µé¾î°©´Ï´Ù");
-						
+						moneyText.setText("µ· : " + player.money);
 					}
 				}
 				break;
