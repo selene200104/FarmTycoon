@@ -40,7 +40,6 @@ public class RotCrops extends Thread{
 						Farming.amountOfWater[numOfField].setText("물의 양 : 매우부족");
 					}
 
-					
 					//오랫동안 물을 주지 않으면 썩기 
 				}else if(Farming.statusOfField.get(numOfField).equals("need Water field")) {
 					randomRotTime = random.nextInt(maxTime - minTime + 1) + minTime;

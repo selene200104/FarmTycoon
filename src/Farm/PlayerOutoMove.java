@@ -13,7 +13,7 @@ public class PlayerOutoMove extends Thread {
 
 	@Override
 	public synchronized void run() {
-		try {
+		try { 
 			
 			if(whatKind == "fields") {
 				while (Farming.playerImage.getX() != Farming.fieldImages[numOfField].getX()) {

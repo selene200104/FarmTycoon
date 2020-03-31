@@ -45,7 +45,7 @@ public class Farming {
 	}
 
 	Player player = new Player();
-	SparrowObstruction sparrowObstruction = new SparrowObstruction();
+	SparrowObstruction sparrowObstruction = new SparrowObstruction(); //참새 방해 쓰레드 
 	
 	static JPanel farmingScene = new JPanel() {
 		//public void paintComponent(Graphics g) {
@@ -54,20 +54,24 @@ public class Farming {
 		//	g.drawImage(image.getImage(), 0, 0, d.width, d.height, this);
 		//}
 	};
-
-	static JLabel[] fieldImages = new JLabel[18];
-	static JLabel[] emergencyMarkingImages = new JLabel[18];//물이 필요하다는 긴급표시
-	JButton chooseSeedCanelButton = new JButton();
+	
 	JPanel seedPlantingWindow = new JPanel();
 	JPanel plantStateWindow = new JPanel();
+	JPanel gameSuccess = new JPanel();
+	JPanel fameFail = new JPanel();
 	
+	
+	static JLabel[] fieldImages = new JLabel[18];
+	static JLabel[] emergencyMarkingImages = new JLabel[18]; //물이 필요하다는 긴급표시
 	static JLabel playerImage = new JLabel();
-	JLabel playerEnergy = new JLabel();
-	JLabel daysText = new JLabel();
+	
 	static JLabel houseImage = new JLabel();
 	JLabel storeImage = new JLabel();
+	JLabel playerEnergy = new JLabel();
+	JLabel daysText = new JLabel();
 	JButton[] seedImage = new JButton[4];
 	JLabel[] seedExplanationImage = new JLabel[4];
+	JButton chooseSeedCanelButton = new JButton();
 
 	//식물 상태창 
 	JLabel[] plantsImage = new JLabel[18];
@@ -86,8 +90,8 @@ public class Farming {
 	JLabel[] inventoryDescriptionText = new JLabel[4]; //인벤토리 설명 (어떤 칸인지)
 	int inventoryHorizontalLength = 5;
 	int inventoryVerticalLength = 0;
-	int inventoryInterval = 100;
-	int inventoryWidth = 90;
+	int inventoryInterval = 126;
+	int inventoryWidth = 100;
 	int inventoryHeight = 60;
 	int inventoryDescriptionlength = 0;
 	
@@ -163,7 +167,7 @@ public class Farming {
 		
 		//인벤토리 창
 		inventoryWindow.setIcon(new ImageIcon("./images/inventoryBackGround.png"));
-		inventoryWindow.setBounds(180, 80, 400, 350);
+		inventoryWindow.setBounds(130, 50, 500, 360);
 		inventoryWindow.setLayout(null);
 		inventoryWindow.setVisible(false);
 		farmingScene.add(inventoryWindow);
@@ -175,22 +179,22 @@ public class Farming {
 			if (i < 4) {
 				inventoryVerticalLength = 30;
 				inventoryCompartment[i].setBounds(inventoryHorizontalLength, inventoryVerticalLength, inventoryWidth , inventoryHeight);
-				numberOfItemsText[i].setBounds(inventoryHorizontalLength + 40, inventoryVerticalLength + 20, 50 , 50);
+				numberOfItemsText[i].setBounds(inventoryHorizontalLength + 50, inventoryVerticalLength + 20,  50, 50);
 
 			} else if ((i >= 4) && (i < 8)) {
 				inventoryVerticalLength = 120;
 				inventoryCompartment[i].setBounds(inventoryHorizontalLength, inventoryVerticalLength, inventoryWidth, inventoryHeight);
-				numberOfItemsText[i].setBounds(inventoryHorizontalLength + 40, inventoryVerticalLength + 20, 50 , 50);
+				numberOfItemsText[i].setBounds(inventoryHorizontalLength + 50, inventoryVerticalLength + 20, 50 , 50);
 				
 			} else if ((i >= 8) && (i < 12)) {
 				inventoryVerticalLength = 210;
 				inventoryCompartment[i].setBounds(inventoryHorizontalLength, inventoryVerticalLength, inventoryWidth, inventoryHeight);
-				numberOfItemsText[i].setBounds(inventoryHorizontalLength + 40, inventoryVerticalLength + 20, 50 , 50);
+				numberOfItemsText[i].setBounds(inventoryHorizontalLength + 50, inventoryVerticalLength + 20, 50 , 50);
 				
 			} else if ((i >= 12) && (i < 16)) {
 				inventoryVerticalLength = 295;
 				inventoryCompartment[i].setBounds(inventoryHorizontalLength, inventoryVerticalLength, inventoryWidth, inventoryHeight);
-				numberOfItemsText[i].setBounds(inventoryHorizontalLength + 40, inventoryVerticalLength + 20, 50 , 50);
+				numberOfItemsText[i].setBounds(inventoryHorizontalLength + 50, inventoryVerticalLength + 20, 50 , 50);
 			}
 			inventoryHorizontalLength = inventoryInterval + inventoryHorizontalLength;
 			
@@ -199,11 +203,12 @@ public class Farming {
 			}
 
 			inventoryCompartment[i].setHorizontalAlignment(SwingConstants.CENTER);
-			//inventoryCompartment[i].setIcon(new ImageIcon("./images/storeImage.png"));
+			inventoryCompartment[i].setIcon(new ImageIcon("./images/inventory.png"));
 			
 			numberOfItemsText[i].setHorizontalAlignment(SwingConstants.CENTER);
 			numberOfItemsText[i].setText("X 0");
 		}
+		/*
 		inventoryCompartment[0].setIcon(new ImageIcon("./images/PumkinFieldImage.png"));
 		inventoryCompartment[1].setIcon(new ImageIcon("./images/OnionFieldImage.png"));
 		inventoryCompartment[2].setIcon(new ImageIcon("./images/CabbageFieldImage.png"));
@@ -220,6 +225,7 @@ public class Farming {
 		inventoryCompartment[13].setIcon(new ImageIcon("./images/OnionFieldImage.png"));
 		inventoryCompartment[14].setIcon(new ImageIcon("./images/CabbageFieldImage.png"));
 		inventoryCompartment[15].setIcon(new ImageIcon("./images/CarrotFieldImage.png"));
+		*/
 		
 		for (int i = 0; i < inventoryDescriptionText.length; i++) {
 			inventoryWindow.add(inventoryDescriptionText[i] = new JLabel());
