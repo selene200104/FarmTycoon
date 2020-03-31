@@ -204,22 +204,22 @@ public class Farming {
 			if (i < 4) {
 				inventoryVerticalLength = 30;
 				inventoryCompartment[i].setBounds(inventoryHorizontalLength, inventoryVerticalLength, inventoryWidth , inventoryHeight);
-				numberOfItemsText[i].setBounds(inventoryHorizontalLength + 50, inventoryVerticalLength + 20,  50, 50);
+				numberOfItemsText[i].setBounds(inventoryHorizontalLength + 60, inventoryVerticalLength + 20,  50, 50);
 
 			} else if ((i >= 4) && (i < 8)) {
 				inventoryVerticalLength = 120;
 				inventoryCompartment[i].setBounds(inventoryHorizontalLength, inventoryVerticalLength, inventoryWidth, inventoryHeight);
-				numberOfItemsText[i].setBounds(inventoryHorizontalLength + 50, inventoryVerticalLength + 20, 50 , 50);
+				numberOfItemsText[i].setBounds(inventoryHorizontalLength + 60, inventoryVerticalLength + 20, 50 , 50);
 				
 			} else if ((i >= 8) && (i < 12)) {
 				inventoryVerticalLength = 210;
 				inventoryCompartment[i].setBounds(inventoryHorizontalLength, inventoryVerticalLength, inventoryWidth, inventoryHeight);
-				numberOfItemsText[i].setBounds(inventoryHorizontalLength + 50, inventoryVerticalLength + 20, 50 , 50);
+				numberOfItemsText[i].setBounds(inventoryHorizontalLength + 60, inventoryVerticalLength + 20, 50 , 50);
 				
 			} else if ((i >= 12) && (i < 16)) {
 				inventoryVerticalLength = 295;
 				inventoryCompartment[i].setBounds(inventoryHorizontalLength, inventoryVerticalLength, inventoryWidth, inventoryHeight);
-				numberOfItemsText[i].setBounds(inventoryHorizontalLength + 50, inventoryVerticalLength + 20, 50 , 50);
+				numberOfItemsText[i].setBounds(inventoryHorizontalLength + 60, inventoryVerticalLength + 20, 50 , 50);
 			}
 			inventoryHorizontalLength = inventoryInterval + inventoryHorizontalLength;
 			
@@ -233,16 +233,16 @@ public class Farming {
 			numberOfItemsText[i].setHorizontalAlignment(SwingConstants.CENTER);
 			numberOfItemsText[i].setText("X 0");
 		}
-		/*
-		inventoryCompartment[0].setIcon(new ImageIcon("./images/PumkinFieldImage.png"));
-		inventoryCompartment[1].setIcon(new ImageIcon("./images/OnionFieldImage.png"));
-		inventoryCompartment[2].setIcon(new ImageIcon("./images/CabbageFieldImage.png"));
-		inventoryCompartment[3].setIcon(new ImageIcon("./images/CarrotFieldImage.png"));
-		inventoryCompartment[4].setIcon(new ImageIcon("./images/PumkinFieldImage.png"));
-		inventoryCompartment[5].setIcon(new ImageIcon("./images/OnionFieldImage.png"));
-		inventoryCompartment[6].setIcon(new ImageIcon("./images/CabbageFieldImage.png"));
-		inventoryCompartment[7].setIcon(new ImageIcon("./images/CarrotFieldImage.png"));
-		inventoryCompartment[8].setIcon(new ImageIcon("./images/PumkinFieldImage.png"));
+		
+		inventoryCompartment[0].setIcon(new ImageIcon("./images/PumkinSeed_inventory.png"));
+		inventoryCompartment[1].setIcon(new ImageIcon("./images/OnionSeed_inventory.png"));
+		inventoryCompartment[2].setIcon(new ImageIcon("./images/CabbageSeed_inventory.png"));
+		inventoryCompartment[3].setIcon(new ImageIcon("./images/CarrotSeed_inventory.png"));
+		inventoryCompartment[4].setIcon(new ImageIcon("./images/Pumkin_inventory.png"));
+		inventoryCompartment[5].setIcon(new ImageIcon("./images/Onion_inventory.png"));
+		inventoryCompartment[6].setIcon(new ImageIcon("./images/Cabbage_inventory.png"));
+		inventoryCompartment[7].setIcon(new ImageIcon("./images/Carrot_inventory.png"));
+		/*inventoryCompartment[8].setIcon(new ImageIcon("./images/PumkinFieldImage.png"));
 		inventoryCompartment[9].setIcon(new ImageIcon("./images/OnionFieldImage.png"));
 		inventoryCompartment[10].setIcon(new ImageIcon("./images/CabbageFieldImage.png"));
 		inventoryCompartment[11].setIcon(new ImageIcon("./images/CarrotFieldImage.png"));
