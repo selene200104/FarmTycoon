@@ -39,7 +39,7 @@ public class DungeonWildBear extends JPanel {
 	static Random randomItemSelect = new Random();
 	static Random randomRun = new Random();
 
-	// 랜덤 버섯 선택하는 랜덤함수
+	// 복불복버섯 선택하는 랜덤함수
 	public static void randomMushroomSelect() {
 		randomMushroom = randomMushroomSelect.nextInt(2);
 	}
@@ -72,7 +72,7 @@ public class DungeonWildBear extends JPanel {
 		JTextArea textArea = new JTextArea();
 		textArea.setBounds(68, 218, 662, 216);
 		textArea.setEnabled(true);
-		//textArea.setFont((new Font("굴림체", Font.BOLD, 15)));
+		textArea.setFont((new Font("굴림체", Font.BOLD, 15)));
 
 		JScrollPane scrollBar = new JScrollPane(textArea);
 		scrollBar.setBounds(68, 218, 662, 216);
@@ -177,8 +177,8 @@ public class DungeonWildBear extends JPanel {
 									ie.printStackTrace();
 								}
 								
-								System.out.println("랜덤 버섯 받은 후 갯수: " +numOfRandomMushroom);
-								JOptionPane.showMessageDialog(null, "랜덤버섯을 받았습니다", "SYSTEM", JOptionPane.INFORMATION_MESSAGE);
+								System.out.println("복불복버섯 받은 후 갯수: " +numOfRandomMushroom);
+								JOptionPane.showMessageDialog(null, "복불복버섯을 받았습니다", "SYSTEM", JOptionPane.INFORMATION_MESSAGE);
 
 								Main.btnNewButton.setVisible(true);
 							} else if (randomItem == 2) {
@@ -212,33 +212,47 @@ public class DungeonWildBear extends JPanel {
 		useItemButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				System.out.println("랜덤 버섯 사용 전 갯수: " + numOfRandomMushroom);
+				System.out.println("복불복버섯 사용 전 갯수: " + numOfRandomMushroom);
 
 				if (Player2.hp > 0) {
 					if (wildBear.hp > 0) {
 						if (numOfRandomMushroom > 0) {
 							numOfRandomMushroom--;
-							// System.out.println("랜덤 버섯 사용 후 남은 갯수: " +numOfRandomMushroom);
+							// System.out.println("복불복버섯 사용 후 남은 갯수: " +numOfRandomMushroom);
 							randomMushroomSelect();
-							// System.out.println("랜덤 버섯 선택번호: "randomMushroom);
+							// System.out.println("복불복버섯 선택번호: "randomMushroom);
 
 							if (randomMushroom == 0) {
-								Player2.hp = Player2.hp + 20;
+								Player2.hp = Player2.hp + 100;
 								if (Player2.hp > 100) {
 									Player2.hp = 100;
 								}
-								textArea.append("랜덤버섯의 효과로 플레이어의 피 증가! 체력:" + Player2.hp + "\n");
+								textArea.append("복불복버섯의 효과로 플레이어의 피 증가! 체력:" + Player2.hp + "\n");
 							}
 
 							if (randomMushroom == 1) {
-								Player2.hp = Player2.hp - 20;
+								Player2.hp = Player2.hp - 100;
+								textArea.append("복불복버섯의 효과로 플레이어의 피 감소! 체력: " + Player2.hp + "\n");
+								
 								if (Player2.hp <= 0) {
 									Player2.hp = 0;
-								}
-								textArea.append("랜덤버섯의 효과로 플레이어의 피 감소! 체력: " + Player2.hp + "\n");
+								
+									Main.day ++;
+									Main.energy = 50;
+									textArea.selectAll();
+									textArea.replaceSelection("");
+									setVisible(false);
+									//interrupt();
+									Main.btnNewButton.setVisible(true);
+									JOptionPane.showMessageDialog(null, "복불복버섯의 효과로 죽고말았어요.", "SYSTEM", JOptionPane.INFORMATION_MESSAGE);
+
+									//}catch(Exception ie) {
+									//	ie.printStackTrace();
+									//}
+								}		
 							}
 						} else {
-							textArea.append("랜덤버섯이 없어서 사용할 수 없습니다.\n");
+							textArea.append("복불복버섯이 없어서 사용할 수 없습니다.\n");
 						}
 					}
 				}
