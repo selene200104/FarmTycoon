@@ -44,7 +44,7 @@ public class Main extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
-				JPanel dungeonWildBear = new DungeonWildBear();
+				/*JPanel dungeonWildBear = new DungeonWildWolf();
 				dungeonWildBear.setVisible(false);
 				getContentPane().add(dungeonWildBear);
 				Player2.hp = 100;
@@ -52,6 +52,21 @@ public class Main extends JFrame {
 				//dungeonWildBear.wildBear.hp = 100;
 				//JPanel dungeonWildBear = new DungeonWildBear();
 				dungeonWildBear.setVisible(true);
+				btnNewButton.setVisible(false);*/
+				
+				
+				/*JPanel dungeonWildWolf = new DungeonWildWolf();
+				dungeonWildWolf.setVisible(false);
+				getContentPane().add(dungeonWildWolf);
+				Player2.hp = 100;
+				dungeonWildWolf.setVisible(true);
+				btnNewButton.setVisible(false);*/
+				
+				JPanel dungeonWildSnake = new DungeonWildSnake();
+				dungeonWildSnake.setVisible(false);
+				getContentPane().add(dungeonWildSnake);
+				Player2.hp = 100;
+				dungeonWildSnake.setVisible(true);
 				btnNewButton.setVisible(false);
 				
 				//다른 버튼 및 레이블 setVisible로 보여줄지 안보여줄지 설정 하기				

@@ -14,7 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
-public class DungeonWildBear extends JPanel {
+public class DungeonWildWolf extends JPanel {
 
 	public static Object textArea;
 	private JPanel contentPane;
@@ -23,15 +23,9 @@ public class DungeonWildBear extends JPanel {
 	private JButton runAwayButton;
 	private JButton attackButton;
 
-	
-	//int energy = 100;
-	//static int wildBearHp = 100;
-
 	static int randomMushroom;	
 	static int randomItem;	//랜덤으로 받을 수 있는 아이템의 번호
 	static int numOfRun;	//도망칠 수 있는 랜덤 번호
-
-	//static int wildBearHp = 110;
 
 	static Random randomMushroomSelect = new Random();
 	static Random randomItemSelect = new Random();
@@ -52,21 +46,21 @@ public class DungeonWildBear extends JPanel {
 		numOfRun = randomRun.nextInt(5);
 	}
 
-	public DungeonWildBear() {
+	public DungeonWildWolf() {
 		//System.out.println("오늘은 " + Main.day + "일입니다. 플레이어 체력은 " + Main.energy + "입니다.");
-		//System.out.println("곰 체력"+wildBearHp);
+		//System.out.println("늑대 체력"+wildBearHp);
 		setLayout(null);
 		setBounds(0, 0, 800, 600);
 		setBackground(Color.black);
 		
-		WildAnimal wildBear = new WildAnimal("야생곰", 100, 15, true);
+		WildAnimal wildWolf = new WildAnimal("야생늑대", 100, 10, true);
 		
 		
-		JLabel wildBearImage = new JLabel();
-		wildBearImage.setHorizontalAlignment(SwingConstants.CENTER);
-		wildBearImage.setIcon(new ImageIcon("./images/wildBear.png"));
-		wildBearImage.setBounds(292, 10, 224, 170);
-		add(wildBearImage);
+		JLabel wildWolfImage = new JLabel();
+		wildWolfImage.setHorizontalAlignment(SwingConstants.CENTER);
+		wildWolfImage.setIcon(new ImageIcon("./images/wildWolf.png"));
+		wildWolfImage.setBounds(292, 10, 224, 170);
+		add(wildWolfImage);
 
 		JScrollPane scrollBar = new JScrollPane();
 		scrollBar.setBounds(68, 201, 662, 186);
@@ -84,7 +78,7 @@ public class DungeonWildBear extends JPanel {
 		itemPanel.setVisible(false);
 		add(itemPanel);
 		
-		// 야생곰 자동 동격 쓰레드
+		// 야생늑대 자동 동격 쓰레드
 		new Thread(new Runnable() {
 			public void run() {
 				try {
@@ -93,16 +87,16 @@ public class DungeonWildBear extends JPanel {
 						Thread.sleep(1000);
 						wildBearAttack();
 						//System.out.println("공격중");
-					} while (Player2.hp > 0 && wildBear.hp > 0);
+					} while (Player2.hp > 0 && wildWolf.hp > 0);
 				} catch (Exception ie) {
 					ie.printStackTrace();
 				}
 			}
 		private void wildBearAttack() {
 			{
-				if (wildBear.hp > 0) {
-					Player2.hp = Player2.hp - wildBear.power;
-					textArea.append("야생곰이 공격하였습니다! (플레이어의 남은 피: " + Player2.hp + ")\n");
+				if (wildWolf.hp > 0) {
+					Player2.hp = Player2.hp - wildWolf.power;
+					textArea.append("야생늑대가 공격하였습니다! (플레이어의 남은 피: " + Player2.hp + ")\n");
 					scrollBar.getVerticalScrollBar().setValue(scrollBar.getVerticalScrollBar().getMaximum());
 
 					// 게임에 지면 다음날로 바뀌고, 플레이어의 체력이 50으로 시작한다.
@@ -116,7 +110,7 @@ public class DungeonWildBear extends JPanel {
 							setVisible(false);
 							//interrupt();
 							Main.btnNewButton.setVisible(true);
-							JOptionPane.showMessageDialog(null, "야생곰한테 당하고 말았습니다.", "SYSTEM", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "야생늑대한테 당하고 말았습니다.", "SYSTEM", JOptionPane.INFORMATION_MESSAGE);
 
 					}
 				}
@@ -130,15 +124,15 @@ public class DungeonWildBear extends JPanel {
 
 				if (Player2.hp > 0) {
 
-					if (wildBear.hp > 0) {
+					if (wildWolf.hp > 0) {
 						Player2.attackPower = Player2.randomPower.nextInt(11) + 10;
-						textArea.append("플레이어는 야생곰에게 " + Player2.attackPower + " 의 데미지를 입혔습니다! ");
-						wildBear.hp = wildBear.hp - Player2.attackPower;
+						textArea.append("플레이어는 야생늑대에게 " + Player2.attackPower + " 의 데미지를 입혔습니다! ");
+						wildWolf.hp = wildWolf.hp - Player2.attackPower;
 
-						if (wildBear.hp > 0) {
-							textArea.append("(남은 야생곰의 체력은 " + wildBear.hp + " 입니다!) \n");
-						} else if (wildBear.hp <= 0) {
-							textArea.append("야생 곰이 죽었습니다! \n");
+						if (wildWolf.hp > 0) {
+							textArea.append("(남은 야생늑대의 체력은 " + wildWolf.hp + " 입니다!) \n");
+						} else if (wildWolf.hp <= 0) {
+							textArea.append("야생 늑대가 죽었습니다! \n");
 
 							randomItemSelect();
 
@@ -163,15 +157,16 @@ public class DungeonWildBear extends JPanel {
 								textArea.replaceSelection("");
 								setVisible(false);
 								
-								System.out.println("복불복버섯 받은 후 갯수: " +Player2.numOfRandomMushroom);
+								//System.out.println("복불복버섯 받은 후 갯수: " +Player2.numOfRandomMushroom);
 								JOptionPane.showMessageDialog(null, "복불복버섯을 받았습니다", "SYSTEM", JOptionPane.INFORMATION_MESSAGE);
-
 								Main.btnNewButton.setVisible(true);
 							} 
-							//돈 받음
+							//돈받음
 							else if (randomItem == 2) {
 								//textArea.append("SYSTEM: 돈을 받았습니다! \n");
-								Player2.money = Player2.money + 2000;
+								Player2.money = Player2.money + 500;
+								System.out.println("돈 받은 후 소유 머니: " +Player2.money);
+								
 								textArea.selectAll();
 								textArea.replaceSelection("");
 								setVisible(false);
@@ -204,7 +199,7 @@ public class DungeonWildBear extends JPanel {
 				System.out.println("복불복버섯 사용 전 갯수: " + Player2.numOfRandomMushroom);
 
 				if (Player2.hp > 0) {
-					if (wildBear.hp > 0) {
+					if (wildWolf.hp > 0) {
 						if (Player2.numOfRandomMushroom > 0) {
 							Player2.numOfRandomMushroom--;
 							// System.out.println("복불복버섯 사용 후 남은 갯수: " +numOfRandomMushroom);
@@ -256,7 +251,7 @@ public class DungeonWildBear extends JPanel {
 		usePotionHpOf30_Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (Player2.hp > 0) {
-					if (wildBear.hp > 0) {
+					if (wildWolf.hp > 0) {
 						if(Player2.numOfPotionHp_30 >0) {
 							Player2.numOfPotionHp_30--;
 							Player2.hp = Player2.hp +30;
@@ -280,7 +275,7 @@ public class DungeonWildBear extends JPanel {
 		usePotionHpOf50_Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (Player2.hp > 0) {
-					if (wildBear.hp > 0) {
+					if (wildWolf.hp > 0) {
 						if(Player2.numOfPotionHp_50 >0) {
 							Player2.numOfPotionHp_50--;
 							Player2.hp = Player2.hp +50;
@@ -308,13 +303,13 @@ public class DungeonWildBear extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				if (Player2.hp > 0) {
-					if (wildBear.hp > 0) {
+					if (wildWolf.hp > 0) {
 						randomRun();
 
 						if (numOfRun == 0) {
 							//wildBear.hp = wildBear.hp-wildBear.hp ;
-							wildBear.hp = 0;						
-							System.out.println("도망갈때 곰 체력: "+wildBear.hp);
+							wildWolf.hp = 0;						
+							System.out.println("도망갈때 늑대 체력: "+wildWolf.hp);
 							textArea.selectAll();
 							textArea.replaceSelection("");
 							setVisible(false);
