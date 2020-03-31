@@ -268,11 +268,17 @@ public class Farming {
 				
 				if (player.energy <= 5) {
 					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
-				} else {
+					
+				} if(player.numOfPumpkinSeed == 0){
+					JOptionPane.showMessageDialog(null, "호박씨가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+					
+				}else {
+				
 					plantsImage[numOfField].setIcon(new ImageIcon("./images/PumkinFieldImage.png"));
 					plantsNametext[numOfField].setText("이름 : 호박");
 					timeLeftText[numOfField].setText("남은 일 수 : 4일");
 
+					player.numOfPumpkinSeed--;
 					daysRemaining[numOfField] = 4;
 					player.energy = player.energy - 5;
 					playerEnergy.setText("남은 에너지 : " + player.energy);
@@ -285,11 +291,16 @@ public class Farming {
 
 				if (player.energy <= 5) {
 					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+					
+				} if(player.numOfOnionSeed == 0){
+					JOptionPane.showMessageDialog(null, "양파씨가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+					
 				} else {
 					plantsImage[numOfField].setIcon(new ImageIcon("./images/OnionFieldImage.png"));
 					plantsNametext[numOfField].setText("이름 : 양파");
 					timeLeftText[numOfField].setText("남은 일 수 : 2일");
 
+					player.numOfOnionSeed--;
 					daysRemaining[numOfField] = 2;
 					player.energy = player.energy - 5;
 					playerEnergy.setText("남은 에너지 : " + player.energy);
@@ -302,11 +313,16 @@ public class Farming {
 
 				if (player.energy <= 5) {
 					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+					
+				}if(player.numOfCabbageSeed == 0){
+					JOptionPane.showMessageDialog(null, "양배추씨가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+					
 				} else {
 					plantsImage[numOfField].setIcon(new ImageIcon("./images/CabbageFieldImage.png"));
 					plantsNametext[numOfField].setText("이름 : 양배추");
 					timeLeftText[numOfField].setText("남은 일 수 : 3일");
 
+					player.numOfCabbageSeed--;
 					daysRemaining[numOfField] = 3;
 					player.energy = player.energy - 5;
 					playerEnergy.setText("남은 에너지 : " + player.energy);
@@ -319,11 +335,16 @@ public class Farming {
 
 				if (player.energy <= 5) {
 					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
-				} else {
+					
+				}if(player.numOfCarrotSeed == 0){
+					JOptionPane.showMessageDialog(null, "당근씨가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+					
+				}  else {
 					plantsImage[numOfField].setIcon(new ImageIcon("./images/CarrotFieldImage.png"));
 					plantsNametext[numOfField].setText("이름 : 당근");
 					timeLeftText[numOfField].setText("남은 일 수 : 2일");
 
+					player.numOfCarrotSeed--;
 					daysRemaining[numOfField] = 2;
 					player.energy = player.energy - 5;
 					playerEnergy.setText("남은 에너지 : " + player.energy);
@@ -457,7 +478,20 @@ public class Farming {
 							|| statusOfField.get(numOfField).equals("Proper field")) {
 						//성장한다
 						statusOfField.set(numOfField, "fullGrown field");
-						fieldImages[numOfField].setIcon(new ImageIcon("./images/fullGrownFieldImage.png"));
+						
+						if (plantsNametext[numOfField].getText().equals("이름 : 호박")) {
+							fieldImages[numOfField].setIcon(new ImageIcon("./images/PumKinFieldImage.png"));
+
+						} else if (plantsNametext[numOfField].getText().equals("이름 : 양파")) {
+							fieldImages[numOfField].setIcon(new ImageIcon("./images/OnionFieldImage.png"));
+
+						} else if (plantsNametext[numOfField].getText().equals("이름 : 당근")) {
+							fieldImages[numOfField].setIcon(new ImageIcon("./images/CarrotFieldImage.png"));
+
+						} else if (plantsNametext[numOfField].getText().equals("이름 : 양배추")) {
+							fieldImages[numOfField].setIcon(new ImageIcon("./images/CabbageFieldImage.png"));
+
+						}
 					}
 				}else {
 					JOptionPane.showMessageDialog(null, "뼈의 개수가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
@@ -760,7 +794,7 @@ public class Farming {
 				
 					//집안에서 스페이스바를 눌렀을 때
 				if (playerImage.getY() >= 330 && playerImage.getY() <= 475) {
-					if (playerImage.getX() >= 600 && playerImage.getY() <= 720) {
+					if (playerImage.getX() >= 600 && playerImage.getX() <= 720) {
 
 						//하루가 지나간다
 						JOptionPane.showMessageDialog(null, "하루가 지나갑니다", " ", JOptionPane.INFORMATION_MESSAGE);
@@ -818,7 +852,6 @@ public class Farming {
 									// 하루가 지난 후 일수가 남은 식물은 물을 추가로 줘야하도록 농작물의 상태를 바꿔주었다
 									if (daysRemaining[i] >= 1) {
 
-										System.out.println(i);
 										statusOfField.set(i, "seeded field");
 										amountOfWater[i].setText("물의 양 : 부족");
 									}
@@ -830,9 +863,18 @@ public class Farming {
 									// 썩은 밭이 된다
 									statusOfField.set(i, "rotten field");
 									fieldImages[i].setIcon(new ImageIcon("./images/rottenFieldImage.png"));
+									emergencyMarkingImages[i].setVisible(false);
 								}
 							}
 						}
+					}
+				}
+				
+				//상점 안에서 스페이스 바를 눌렀을 때
+				if (playerImage.getY() >= 328 && playerImage.getY() <= 473) {
+					if (playerImage.getX() >= 0 && playerImage.getX() <= 120) {
+						System.out.println("상점으로 들어갑니다");
+						
 					}
 				}
 				break;
@@ -844,10 +886,10 @@ public class Farming {
 					playerImage.setVisible(true);
 
 				} else {
-					// numberOfItemsText[0].setText("X " + player.numOfPumpkin);
-					// numberOfItemsText[1].setText("X " + player.numOfOnion);
-					// numberOfItemsText[2].setText("X " + player.numOfCabbage);
-					// numberOfItemsText[3].setText("X " + player.numOfCarrot);
+					numberOfItemsText[0].setText("X " + player.numOfPumpkinSeed);
+					numberOfItemsText[1].setText("X " + player.numOfOnionSeed);
+					numberOfItemsText[2].setText("X " + player.numOfCabbageSeed);
+					numberOfItemsText[3].setText("X " + player.numOfCarrotSeed);
 					numberOfItemsText[4].setText("X " + player.numOfPumpkin);
 					numberOfItemsText[5].setText("X " + player.numOfOnion);
 					numberOfItemsText[6].setText("X " + player.numOfCabbage);
