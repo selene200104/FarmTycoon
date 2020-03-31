@@ -84,13 +84,12 @@ public class Farming {
 	JLabel playerEnergyText = new JLabel();
 	JLabel daysText = new JLabel();
 	JLabel moneyText = new JLabel();
-	JLabel[] seedExplanationImage = new JLabel[4];
 	JLabel successText = new JLabel();
 	JLabel failText = new JLabel();
 	JLabel successmoneyEarned = new JLabel();
 	JLabel failmoneyEarned = new JLabel();
 	
-	JButton[] seedImage = new JButton[4];
+	JButton[] chooseSeedImage = new JButton[4];
 	JButton chooseSeedCanelButton = new JButton();
 	
 	//½Ä¹° »óÅÂÃ¢ 
@@ -272,30 +271,25 @@ public class Farming {
 		farmingScene.add(seedPlantingWindow);
 		
 		//¾¾¾Ñ ½É±â Ã¢ ¾È¿¡ÀÖ´Â ¾¾¾ÑÀÇ ÀÌ¹ÌÁö¿Í ¾¾¾ÑÀÇ ¼³¸íÀ» ÃÊ±âÈ­
-		for (int i = 0; i < seedImage.length; i++) {
+		for (int i = 0; i < chooseSeedImage.length; i++) {
 			
-			seedPlantingWindow.add(seedImage[i] = new JButton());
-			seedPlantingWindow.add(seedExplanationImage[i] = new JLabel());
+			seedPlantingWindow.add(chooseSeedImage[i] = new JButton());
 			
-			seedImage[i].setBounds(chooseSeedBoxLength, 10, 105, 100);
-			seedImage[i].setHorizontalAlignment(SwingConstants.CENTER);
-			
-			seedExplanationImage[i].setBounds(chooseSeedBoxLength, 110, 105, 160);
-			seedExplanationImage[i].setHorizontalAlignment(SwingConstants.CENTER);
-			seedExplanationImage[i].setIcon(new ImageIcon("./images/storeImage.png"));
-			
+			chooseSeedImage[i].setBounds(chooseSeedBoxLength, 10, 105, 250);
+			chooseSeedImage[i].setHorizontalAlignment(SwingConstants.CENTER);
+
 			chooseSeedBoxLength = chooseSeedBoxLength + 124;
 			
-			seedImage[i].setFocusPainted(false);
-			seedImage[i].setContentAreaFilled(false);
+			chooseSeedImage[i].setFocusPainted(false);
+			chooseSeedImage[i].setContentAreaFilled(false);
 		}
 		
-		seedImage[0].setIcon(new ImageIcon("./images/PumkinFieldImage.png"));
-		seedImage[1].setIcon(new ImageIcon("./images/OnionFieldImage.png"));
-		seedImage[2].setIcon(new ImageIcon("./images/CabbageFieldImage.png"));
-		seedImage[3].setIcon(new ImageIcon("./images/CarrotFieldImage.png"));
+		chooseSeedImage[0].setIcon(new ImageIcon("./images/choosePumkinSeedExplanation.png"));
+		chooseSeedImage[1].setIcon(new ImageIcon("./images/chooseOnionSeedExplanation.png"));
+		chooseSeedImage[2].setIcon(new ImageIcon("./images/chooseCabbageSeedExplanation.png"));
+		chooseSeedImage[3].setIcon(new ImageIcon("./images/chooseCarrotSeedExplanation.png"));
 		
-		seedImage[0].addActionListener(new ActionListener() {
+		chooseSeedImage[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				if (player.energy <= 5) {
@@ -318,7 +312,7 @@ public class Farming {
 			}
 		});
 		
-		seedImage[1].addActionListener(new ActionListener() {
+		chooseSeedImage[1].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				if (player.energy <= 5) {
@@ -340,7 +334,7 @@ public class Farming {
 			}
 		});
 		
-		seedImage[2].addActionListener(new ActionListener() {
+		chooseSeedImage[2].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				if (player.energy <= 5) {
@@ -362,7 +356,7 @@ public class Farming {
 			}
 		});
 		
-		seedImage[3].addActionListener(new ActionListener() {
+		chooseSeedImage[3].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				if (player.energy <= 5) {
@@ -384,13 +378,13 @@ public class Farming {
 			}
 		});
 		
-		
-		for (int i = 0; i < seedImage.length; i++) {
-			seedImage[i].addActionListener(new ActionListener() {
+		//¼±ÅÃÇÑ ¹çÀÌ ºó ¹çÀÌ¶ó¸é ¾¾¾ÑÀÌ ½É°ÜÁø ¹çÀ¸·Î ¹Ù²Û´Ù.
+		for (int i = 0; i < chooseSeedImage.length; i++) {
+			chooseSeedImage[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 
-					for (int i = 0; i < seedImage.length; i++) {
-						if (e.getSource() == seedImage[i]) {
+					for (int i = 0; i < chooseSeedImage.length; i++) {
+						if (e.getSource() == chooseSeedImage[i]) {
 							
 							if (statusOfField.get(numOfField).equals("empty Field")) {
 								fieldImages[numOfField].setIcon(new ImageIcon("./images/seedFieldImage.png"));
