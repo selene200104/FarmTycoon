@@ -9,12 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.File;
 import java.util.ArrayList;
-
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -254,10 +249,9 @@ public class Farming {
 		numberOfItemsText[10].setText("");
 		numberOfItemsText[11].setText("");
 		inventoryCompartment[12].setIcon(new ImageIcon("./images/randomMushroom.png"));
-		/*inventoryCompartment[13].setIcon(new ImageIcon("./images/OnionFieldImage.png"));
-		inventoryCompartment[14].setIcon(new ImageIcon("./images/CabbageFieldImage.png"));
-		inventoryCompartment[15].setIcon(new ImageIcon("./images/CarrotFieldImage.png"));
-		*/
+		inventoryCompartment[13].setIcon(new ImageIcon("./images/bone_invertory.png"));
+		numberOfItemsText[14].setText("");
+		numberOfItemsText[15].setText("");
 		
 		//인벤토리 설명 초기화
 		for (int i = 0; i < inventoryDescriptionText.length; i++) {
