@@ -55,29 +55,48 @@ public class Farming {
 		//}
 	};
 	
+	JPanel gameSuccess = new JPanel() {
+		public void paintComponent(Graphics g) {
+			Dimension d = getSize();
+			ImageIcon image = new ImageIcon("./images/finalBackground.jpg");
+			g.drawImage(image.getImage(), 0, 0, d.width, d.height, this);
+		}
+	};
+	
+	JPanel gameFail = new JPanel() {
+		public void paintComponent(Graphics g) {
+			Dimension d = getSize();
+			ImageIcon image = new ImageIcon("./images/finalBackground.jpg");
+			g.drawImage(image.getImage(), 0, 0, d.width, d.height, this);
+		}
+	};
+	
 	JPanel seedPlantingWindow = new JPanel();
 	JPanel plantStateWindow = new JPanel();
-	JPanel gameSuccess = new JPanel();
-	JPanel fameFail = new JPanel();
+
 	
 	
 	static JLabel[] fieldImages = new JLabel[18];
 	static JLabel[] emergencyMarkingImages = new JLabel[18]; //물이 필요하다는 긴급표시
 	static JLabel playerImage = new JLabel();
-	
 	static JLabel houseImage = new JLabel();
 	JLabel storeImage = new JLabel();
 	JLabel playerEnergy = new JLabel();
 	JLabel daysText = new JLabel();
-	JButton[] seedImage = new JButton[4];
 	JLabel[] seedExplanationImage = new JLabel[4];
+	JLabel successText = new JLabel();
+	JLabel failText = new JLabel();
+	JLabel successmoneyEarned = new JLabel();
+	JLabel failmoneyEarned = new JLabel();
+	
+	JButton[] seedImage = new JButton[4];
 	JButton chooseSeedCanelButton = new JButton();
-
+	
 	//식물 상태창 
+	static JLabel[] amountOfWater = new JLabel[18];
 	JLabel[] plantsImage = new JLabel[18];
 	JLabel[] plantsNametext = new JLabel[18];
 	JLabel[] timeLeftText = new JLabel[18];
-	static JLabel[] amountOfWater = new JLabel[18];
 	JButton waterThePlantsButton = new JButton();
 	JButton rapidGrowthButton = new JButton();
 	JButton harvestingButton = new JButton();
@@ -624,7 +643,40 @@ public class Farming {
 		
 		}
 		
-
+		gameSuccess.setBounds(0, 0, 800, 600);
+		frame.getContentPane().add(gameSuccess);
+		gameSuccess.setLayout(null);
+		gameSuccess.setVisible(false);
+		
+		successText.setText("당신은 프로 농부가 되었습니다");
+		successText.setFont(new Font("굴림", Font.BOLD, 50));
+		successText.setHorizontalAlignment(SwingConstants.CENTER);
+		successText.setBounds(0, 0, 800, 300);
+		gameSuccess.add(successText);
+		
+		successmoneyEarned.setText("당신이 번 돈 : ");
+		successmoneyEarned.setFont(new Font("굴림", Font.BOLD, 30));
+		successmoneyEarned.setHorizontalAlignment(SwingConstants.CENTER);
+		successmoneyEarned.setBounds(0, 200, 800, 300);
+		gameSuccess.add(successmoneyEarned);
+		
+		gameFail.setBounds(0, 0, 800, 600);
+		frame.getContentPane().add(gameFail);
+		gameFail.setLayout(null);
+		gameFail.setVisible(false);
+		
+		failText.setText("당신은 농부에 소질이 없군요..");
+		failText.setFont(new Font("굴림", Font.BOLD, 50));
+		failText.setHorizontalAlignment(SwingConstants.CENTER);
+		failText.setBounds(0, 0, 800, 300);
+		gameFail.add(failText);
+		
+		failmoneyEarned.setText("당신이 번 돈 : ");
+		failmoneyEarned.setFont(new Font("굴림", Font.BOLD, 30));
+		failmoneyEarned.setHorizontalAlignment(SwingConstants.CENTER);
+		failmoneyEarned.setBounds(0, 200, 800, 300);
+		gameFail.add(failmoneyEarned);
+		
 		/*
 		for (int i = 0; i < fieldImages.length; i++) {
 			fieldImages[i].addMouseListener(new MouseAdapter() {
@@ -813,10 +865,16 @@ public class Farming {
 						if (day == finalday) {
 
 							if(player.money > 70000) {
-								System.out.println("게임 승리");
+								//System.out.println("게임 승리");
+								farmingScene.setVisible(false);
+								gameSuccess.setVisible(true);
+								successmoneyEarned.setText("당신이 번 돈 : " + player.money);
 								
 							}else {
-								System.out.println("게임 패배");
+								//System.out.println("게임 패배");
+								farmingScene.setVisible(false);
+								gameFail.setVisible(true);
+								failmoneyEarned.setText("당신이 번 돈 : " + player.money);
 							}
 							
 						} else {
