@@ -46,6 +46,7 @@ public class Farming {
 
 	Player player = new Player();
 	SparrowObstruction sparrowObstruction = new SparrowObstruction(); //참새 방해 쓰레드 
+	AppearanceOfAnimals appearanceOfAnimals = new AppearanceOfAnimals(); //동물 출현 쓰레드
 	
 	static JPanel farmingScene = new JPanel() {
 		//public void paintComponent(Graphics g) {
@@ -721,6 +722,7 @@ public class Farming {
 */
 		
 		sparrowObstruction.start();
+		appearanceOfAnimals.start();
 		frame.addKeyListener(new key());
 		frame.setFocusable(true);
 	}
@@ -771,6 +773,9 @@ public class Farming {
 			
 				
 			case KeyEvent.VK_SPACE:
+				
+				System.out.println(playerImage.getX());
+				System.out.println(playerImage.getY());
 				
 				//밭안(밭 앞)에서 스페이스바를 할 경우 씨앗 선택창또는  식물상태창 볼 수 있다.
 				//상점, 집안(앞)에서 스페이스 바를 할 경우 상점에 들어가거나 하루를 지나가게 할 수 있다.

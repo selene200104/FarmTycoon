@@ -26,7 +26,7 @@ public class SparrowObstruction extends Thread{
 					Farming.sparrowImage.setLocation(Farming.fieldImages[randomField].getX(),Farming.fieldImages[randomField].getY());
 					Farming.statusOfField.set(randomField, "empty Field");
 					Farming.fieldImages[randomField].setIcon(new ImageIcon("C:\\Users\\dayou\\OneDrive\\바탕 화면\\팀노바\\java_teamProject\\basicsFieldImage.png"));
-					
+					 
 					//참새가 나타난 1초 후 참새는 다시 날라간다
 					Thread.sleep(1000);
 					Farming.sparrowImage.setLocation(-100,-100);
