@@ -9,8 +9,8 @@ public class AppearanceOfAnimals extends Thread{
 	Random random = new Random();
 	static Random randomWildAnimalSelect = new Random();
 	
-	int minTime = 1000;
-	int maxTime = 3000;
+	int minTime = 10000;
+	int maxTime = 30000;
 	static int randomWildAnimal;
 	static boolean running = true;
 	

@@ -174,6 +174,7 @@ public class Market extends JFrame {
 				pumpkinSeedCountMinus.setOpaque(true);
 				buyShopPanel.add(pumpkinSeedCountMinus);
 
+				// 호박씨앗 사려는 수
 				final JLabel buyPumpkinSeedAmountLabel = new JLabel("" + amountBuyingPumpkinSeed);
 				buyPumpkinSeedAmountLabel.setHorizontalAlignment(JLabel.CENTER);
 				buyPumpkinSeedAmountLabel.setBounds(340, 60, 50, 20);
@@ -246,7 +247,8 @@ public class Market extends JFrame {
 				onionSeedCountMinus.setBackground(Color.white);
 				onionSeedCountMinus.setOpaque(true);
 				buyShopPanel.add(onionSeedCountMinus);
-
+				
+				// 양파씨앗 사려는 수
 				final JLabel buyOnionSeedAmountLabel = new JLabel("" + amountBuyingOnionSeed);
 				buyOnionSeedAmountLabel.setHorizontalAlignment(JLabel.CENTER);
 				buyOnionSeedAmountLabel.setBounds(340, 80, 50, 20);
@@ -320,6 +322,7 @@ public class Market extends JFrame {
 				cabbageSeedCountMinus.setOpaque(true);
 				buyShopPanel.add(cabbageSeedCountMinus);
 
+				// 양배추씨앗 사려는 수
 				final JLabel buyCabbageSeedAmountLabel = new JLabel("" + amountBuyingCabbageSeed);
 				buyCabbageSeedAmountLabel.setHorizontalAlignment(JLabel.CENTER);
 				buyCabbageSeedAmountLabel.setBounds(340, 100, 50, 20);
@@ -393,6 +396,7 @@ public class Market extends JFrame {
 				carrotSeedCountMinus.setOpaque(true);
 				buyShopPanel.add(carrotSeedCountMinus);
 
+				// 당근씨앗 사려는 수
 				final JLabel buyCarrotSeedAmountLabel = new JLabel("" + amountBuyingCarrotSeed);
 				buyCarrotSeedAmountLabel.setHorizontalAlignment(JLabel.CENTER);
 				buyCarrotSeedAmountLabel.setBounds(340, 120, 50, 20);
@@ -474,6 +478,7 @@ public class Market extends JFrame {
 				potionHp_30CountMinus.setOpaque(true);
 				buyShopPanel.add(potionHp_30CountMinus);
 
+				// 체력포션(30) 사려는 수
 				final JLabel buypotionHp_30AmountLabel = new JLabel("" + amountBuyingPotionHp_30);
 				buypotionHp_30AmountLabel.setHorizontalAlignment(JLabel.CENTER);
 				buypotionHp_30AmountLabel.setBounds(340, 180, 50, 20);
@@ -547,6 +552,7 @@ public class Market extends JFrame {
 				potionHp_50CountMinus.setOpaque(true);
 				buyShopPanel.add(potionHp_50CountMinus);
 
+				// 체력포션(50) 사려는 수
 				final JLabel buypotionHp_50AmountLabel = new JLabel("" + amountBuyingPotionHp_50);
 				buypotionHp_50AmountLabel.setHorizontalAlignment(JLabel.CENTER);
 				buypotionHp_50AmountLabel.setBounds(340, 200, 50, 20);
@@ -628,6 +634,7 @@ public class Market extends JFrame {
 				FieldUpgrade_firstCountMinus.setOpaque(true);
 				buyShopPanel.add(FieldUpgrade_firstCountMinus);
 
+				// 1단계 업그레이드권 사려는 수
 				final JLabel countFieldUpgrade_firstLabel = new JLabel("" + countFieldUpgrade_first);
 				countFieldUpgrade_firstLabel.setHorizontalAlignment(JLabel.CENTER);
 				countFieldUpgrade_firstLabel.setBounds(340, 260, 50, 20);
@@ -640,6 +647,7 @@ public class Market extends JFrame {
 				FieldUpgrade_firstCountPlus.setOpaque(true);
 				buyShopPanel.add(FieldUpgrade_firstCountPlus);
 
+				//1단계 업그레이드권을 소유하고 있지 않은 경우에만 살 수 있다.
 				if(amountFieldUpgrade_first == 0) {
 					
 				FieldUpgrade_firstCountMinus.addActionListener(new ActionListener() {
@@ -703,6 +711,7 @@ public class Market extends JFrame {
 				FieldUpgrade_secondCountMinus.setOpaque(true);
 				buyShopPanel.add(FieldUpgrade_secondCountMinus);
 
+				// 2단계 업그레이드권 사려는 수
 				final JLabel countFieldUpgrade_secondLabel = new JLabel("" + countFieldUpgrade_second);
 				countFieldUpgrade_secondLabel.setHorizontalAlignment(JLabel.CENTER);
 				countFieldUpgrade_secondLabel.setBounds(340, 280, 50, 20);
@@ -715,6 +724,7 @@ public class Market extends JFrame {
 				FieldUpgrade_secondCountPlus.setOpaque(true);
 				buyShopPanel.add(FieldUpgrade_secondCountPlus);
 
+				// 1단계 업그레이드권을 가지고 있는 경우에만 살 수있다.
 				if (amountFieldUpgrade_first == 1) {
 					FieldUpgrade_secondCountMinus.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent ae) {
@@ -900,6 +910,7 @@ public class Market extends JFrame {
 				pumpkinCountMinus.setOpaque(true);
 				sellShopPanel.add(pumpkinCountMinus);
 
+				// 호박 파려는 수
 				final JLabel sellPumpkinAmountLabel = new JLabel("" + amountSellingPumpkin);
 				sellPumpkinAmountLabel.setHorizontalAlignment(JLabel.CENTER);
 				sellPumpkinAmountLabel.setBounds(340, 40, 50, 20);
@@ -972,6 +983,7 @@ public class Market extends JFrame {
 				onionCountMinus.setOpaque(true);
 				sellShopPanel.add(onionCountMinus);
 
+				// 양파 파려는 수
 				final JLabel sellOnionAmountLabel = new JLabel("" + amountSellingOnion);
 				sellOnionAmountLabel.setHorizontalAlignment(JLabel.CENTER);
 				sellOnionAmountLabel.setBounds(340, 70, 50, 20);
@@ -1044,6 +1056,7 @@ public class Market extends JFrame {
 				cabbageCountMinus.setOpaque(true);
 				sellShopPanel.add(cabbageCountMinus);
 
+				// 양배추 파려는 수
 				final JLabel sellCabbageAmountLabel = new JLabel("" + amountSellingCabbage);
 				sellCabbageAmountLabel.setHorizontalAlignment(JLabel.CENTER);
 				sellCabbageAmountLabel.setBounds(340, 100, 50, 20);
@@ -1116,6 +1129,7 @@ public class Market extends JFrame {
 				carrotCountMinus.setOpaque(true);
 				sellShopPanel.add(carrotCountMinus);
 
+				// 당근 파려는 수
 				final JLabel sellCarrotAmountLabel = new JLabel("" + amountSellingCarrot);
 				sellCarrotAmountLabel.setHorizontalAlignment(JLabel.CENTER);
 				sellCarrotAmountLabel.setBounds(340, 130, 50, 20);

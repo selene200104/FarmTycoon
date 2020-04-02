@@ -17,7 +17,7 @@ public class SparrowObstruction extends Thread{
 		while (running) {
 			try {
 				
-				Thread.sleep(10000);
+				Thread.sleep(15000);
 				
 				randomField = random.nextInt(18);
 					
