@@ -9,13 +9,13 @@ public class AppearanceOfAnimals extends Thread{
 	Random random = new Random();
 	static Random randomWildAnimalSelect = new Random();
 	
-	int minTime = 10000;
-	int maxTime = 30000;
+	int minTime = 1000;
+	int maxTime = 3000;
 	static int randomWildAnimal;
 	static boolean running = true;
 	
 	public static void randomMushroomSelect() {
-		randomWildAnimal = randomWildAnimalSelect.nextInt(2);
+		randomWildAnimal = randomWildAnimalSelect.nextInt(3);
 	}
 	@Override
 	public synchronized void run() {

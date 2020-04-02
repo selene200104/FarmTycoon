@@ -75,7 +75,7 @@ public class DungeonWildWolf extends JPanel {
 		textArea.setFont((new Font("굴림체", Font.BOLD, 15)));
 
 		JPanel itemPanel = new JPanel();
-		itemPanel.setBounds(273, 397, 252, 58);
+		itemPanel.setBounds(200, 397, 400, 58);
 		itemPanel.setLayout(null);
 		itemPanel.setVisible(false);
 		add(itemPanel);
@@ -215,7 +215,7 @@ public class DungeonWildWolf extends JPanel {
 
 		// JButton useRandomMushroomButton = new JButton(new
 		// ImageIcon("img/btLogin.png"));
-		JButton useRandomMushroomButton = new JButton("버섯");
+		JButton useRandomMushroomButton = new JButton("복불복버섯");
 		useRandomMushroomButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -271,10 +271,10 @@ public class DungeonWildWolf extends JPanel {
 			}
 		});
 		// btnNewButton.setFont(new Font("굴림체", Font.PLAIN, 7));
-		useRandomMushroomButton.setBounds(12, 10, 68, 37);
+		useRandomMushroomButton.setBounds(12, 10, 100, 37);
 		itemPanel.add(useRandomMushroomButton);
 
-		JButton usePotionHpOf30_Button = new JButton("체력 30% 포션");
+		JButton usePotionHpOf30_Button = new JButton("체력 30% UP!");
 		usePotionHpOf30_Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (Player.hp > 0) {
@@ -295,10 +295,10 @@ public class DungeonWildWolf extends JPanel {
 				}
 			}
 		});
-		usePotionHpOf30_Button.setBounds(92, 10, 68, 37);
+		usePotionHpOf30_Button.setBounds(120, 10, 130, 37);
 		itemPanel.add(usePotionHpOf30_Button);
 
-		JButton usePotionHpOf50_Button = new JButton("체력 50% 포션");
+		JButton usePotionHpOf50_Button = new JButton("체력 50% UP!");
 		usePotionHpOf50_Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (Player.hp > 0) {
@@ -319,7 +319,7 @@ public class DungeonWildWolf extends JPanel {
 				}
 			}
 		});
-		usePotionHpOf50_Button.setBounds(172, 10, 68, 37);
+		usePotionHpOf50_Button.setBounds(260, 10, 130, 37);
 		itemPanel.add(usePotionHpOf50_Button);
 
 		useItemButton.setBounds(317, 465, 168, 47);

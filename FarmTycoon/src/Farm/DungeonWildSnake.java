@@ -75,7 +75,7 @@ public class DungeonWildSnake extends JPanel {
 		textArea.setFont((new Font("굴림체", Font.BOLD, 15)));
 
 		JPanel itemPanel = new JPanel();
-		itemPanel.setBounds(273, 397, 252, 58);
+		itemPanel.setBounds(200, 397, 400, 58);
 		itemPanel.setLayout(null);
 		itemPanel.setVisible(false);
 		add(itemPanel);
@@ -114,6 +114,7 @@ public class DungeonWildSnake extends JPanel {
 							textArea.replaceSelection("");
 							setVisible(false);
 							// AppearanceOfAnimals.running = true;
+							Farming.farmingScene.setVisible(true);
 							JOptionPane.showMessageDialog(null, "야생뱀한테 당하고 말았습니다.", "SYSTEM",
 									JOptionPane.INFORMATION_MESSAGE);
 							AppearanceOfAnimals appearanceOfAnimals = new AppearanceOfAnimals();
@@ -218,7 +219,7 @@ public class DungeonWildSnake extends JPanel {
 
 		// JButton useRandomMushroomButton = new JButton(new
 		// ImageIcon("img/btLogin.png"));
-		JButton useRandomMushroomButton = new JButton("버섯");
+		JButton useRandomMushroomButton = new JButton("복불복버섯");
 		useRandomMushroomButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -254,6 +255,7 @@ public class DungeonWildSnake extends JPanel {
 									textArea.replaceSelection("");
 									setVisible(false);
 									// AppearanceOfAnimals.running = true;
+									Farming.farmingScene.setVisible(true);
 									JOptionPane.showMessageDialog(null, "복불복버섯의 효과로 죽고말았어요.", "SYSTEM",
 											JOptionPane.INFORMATION_MESSAGE);
 									AppearanceOfAnimals appearanceOfAnimals = new AppearanceOfAnimals();
@@ -273,10 +275,10 @@ public class DungeonWildSnake extends JPanel {
 			}
 		});
 		// btnNewButton.setFont(new Font("굴림체", Font.PLAIN, 7));
-		useRandomMushroomButton.setBounds(12, 10, 68, 37);
+		useRandomMushroomButton.setBounds(12, 10, 100, 37);
 		itemPanel.add(useRandomMushroomButton);
 
-		JButton usePotionHpOf30_Button = new JButton("체력 30% 포션");
+		JButton usePotionHpOf30_Button = new JButton("체력 30% UP!");
 		usePotionHpOf30_Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (Player.hp > 0) {
@@ -297,10 +299,10 @@ public class DungeonWildSnake extends JPanel {
 				}
 			}
 		});
-		usePotionHpOf30_Button.setBounds(92, 10, 68, 37);
+		usePotionHpOf30_Button.setBounds(120, 10, 130, 37);
 		itemPanel.add(usePotionHpOf30_Button);
 
-		JButton usePotionHpOf50_Button = new JButton("체력 50% 포션");
+		JButton usePotionHpOf50_Button = new JButton("체력 50% UP!");
 		usePotionHpOf50_Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (Player.hp > 0) {
@@ -321,7 +323,7 @@ public class DungeonWildSnake extends JPanel {
 				}
 			}
 		});
-		usePotionHpOf50_Button.setBounds(172, 10, 68, 37);
+		usePotionHpOf50_Button.setBounds(260, 10, 130, 37);
 		itemPanel.add(usePotionHpOf50_Button);
 
 		useItemButton.setBounds(317, 465, 168, 47);
@@ -344,6 +346,7 @@ public class DungeonWildSnake extends JPanel {
 							setVisible(false);
 							// AppearanceOfAnimals.running = true;
 							// System.out.println(AppearanceOfAnimals.running);
+							Farming.farmingScene.setVisible(true);
 							JOptionPane.showMessageDialog(null, "도망쳤습니다!", "SYSTEM", JOptionPane.INFORMATION_MESSAGE);
 							AppearanceOfAnimals appearanceOfAnimals = new AppearanceOfAnimals();
 							appearanceOfAnimals.start();
