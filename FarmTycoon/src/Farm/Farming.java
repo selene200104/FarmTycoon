@@ -322,10 +322,10 @@ public class Farming {
 			public void actionPerformed(ActionEvent e) {
 				
 				if (player.energy <= 5) {
-					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
 					
 				} if(player.amountPumpkinSeed == 0){
-					JOptionPane.showMessageDialog(null, "호박씨가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "호박씨가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
 					
 				}else {
 					//선택한 밭의 정보가 호박으로 바뀐다
@@ -345,10 +345,10 @@ public class Farming {
 			public void actionPerformed(ActionEvent e) {
 
 				if (player.energy <= 5) {
-					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
 					
 				} if(player.amountOnionSeed == 0){
-					JOptionPane.showMessageDialog(null, "양파씨가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "양파씨가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
 					
 				} else {
 					cropsImage[numOfField].setIcon(new ImageIcon("./images/OnionFieldImage.png"));
@@ -367,10 +367,10 @@ public class Farming {
 			public void actionPerformed(ActionEvent e) {
 
 				if (player.energy <= 5) {
-					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
 					
 				}if(player.amountCabbageSeed == 0){
-					JOptionPane.showMessageDialog(null, "양배추씨가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "양배추씨가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
 					
 				} else {
 					cropsImage[numOfField].setIcon(new ImageIcon("./images/CabbageFieldImage.png"));
@@ -389,10 +389,10 @@ public class Farming {
 			public void actionPerformed(ActionEvent e) {
 
 				if (player.energy <= 5) {
-					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
 					
 				}if(player.amountCarrotSeed == 0){
-					JOptionPane.showMessageDialog(null, "당근씨가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "당근씨가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
 					
 				}  else {
 					cropsImage[numOfField].setIcon(new ImageIcon("./images/CarrotFieldImage.png"));
@@ -512,7 +512,7 @@ public class Farming {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(player.energy <= 3) {
-					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 
 					// 씨앗만 뿌려진 상태라면
@@ -591,7 +591,7 @@ public class Farming {
 					}
 					emergencyMarkingImages[numOfField].setVisible(false);
 				}else {
-					JOptionPane.showMessageDialog(null, "뼈의 개수가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "뼈의 개수가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
 				}
 				cropStateWindow.setVisible(false);	
 				playerImage.setVisible(true);
@@ -627,7 +627,7 @@ public class Farming {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(player.energy <= 7) {
-					JOptionPane.showMessageDialog(null, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "에너지가 모자랍니다", "!!!!", JOptionPane.INFORMATION_MESSAGE);
 				}else {
 					
 					//다 자란 농작물을 수확한다면 해당 농작물을 얻는다.
@@ -871,11 +871,11 @@ public class Farming {
 						gameCompartment[0].setIcon(new ImageIcon("./images/playerBelongsCompartment.png"));
 						
 					}else {
-						JOptionPane.showMessageDialog(null, "소지한 금액보다 많은 돈을 걸었습니다!!", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(frame, "소지한 금액보다 많은 돈을 걸었습니다!!", "!!!!", JOptionPane.INFORMATION_MESSAGE);
 					}
 					
 				} catch (NumberFormatException f) {
-					JOptionPane.showMessageDialog(null, "숫자만 적어주세요", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "숫자만 적어주세요", "!!!!", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
@@ -1209,7 +1209,7 @@ public class Farming {
 					if (playerImage.getX() >= 600 && playerImage.getX() <= 720) {
 
 						//하루가 지나간다
-						JOptionPane.showMessageDialog(null, "하루가 지나갑니다", " ", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(frame, "하루가 지나갑니다", " ", JOptionPane.INFORMATION_MESSAGE);
 						player.energy = 100;
 						EnergyText.setText("남은 에너지 : " + player.energy);
 						day++;
@@ -1303,6 +1303,27 @@ public class Farming {
 					}
 				}
 				break;
+				
+			 case KeyEvent.VK_G:
+
+		            //밭위에서만 게임을 할 수 있도록 설정해 놓았다.
+		            if (Farming.playerImage.getY() >= -20 && Farming.playerImage.getY() <= 235
+		                  && Farming.playerImage.getX() >= 65 && Farming.playerImage.getX() <= 620) {
+		               //이미 게임 창이 떠있는 경우에 또 G키를 누르면 
+		               if (diceGameChooseScene.isVisible() == true) {
+		                  diceGameChooseScene.setVisible(false);
+		                  farmingScene.setVisible(true);
+
+		               } else {
+		                  amountBetField.setText("");
+		                  diceGameChooseScene.setVisible(true);
+		                  farmingScene.setVisible(false);
+		               }
+		               
+		            }else {
+		               JOptionPane.showMessageDialog(frame, "밭에서만 게임이 가능합니다!", "!!!!", JOptionPane.INFORMATION_MESSAGE);
+		            }
+		            break;
 				
 			case KeyEvent.VK_E:
 				

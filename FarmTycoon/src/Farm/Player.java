@@ -6,7 +6,7 @@ public class Player {
 
 	public int speed = 5;
 	public static int energy = 100;
-	public static int money = 300000;
+	public static int money = 0;
 	
 	public static int amountPumpkinSeed = 10; //가지고 있는 호박씨의 수
 	public static int amountOnionSeed = 10; //가지고 있는 양파씨의 수 

@@ -24,18 +24,6 @@ public class Market extends JFrame {
 		}
 	};
 
-	/*
-	 * JPanel buyShopPanel = new JPanel() { public void paintComponent(Graphics g) {
-	 * Dimension d = getSize(); ImageIcon image = new
-	 * ImageIcon("./images/intheshop.jpg"); g.drawImage(image.getImage(), 0, 0,
-	 * d.width, d.height, this); } };
-	 * 
-	 * JPanel sellShopPanel = new JPanel() { public void paintComponent(Graphics g)
-	 * { Dimension d = getSize(); ImageIcon image = new
-	 * ImageIcon("./images/intheshop.jpg"); g.drawImage(image.getImage(), 0, 0,
-	 * d.width, d.height, this); } };
-	 */
-
 	JPanel buyShopPanel = new JPanel();
 	JPanel sellShopPanel = new JPanel();
 	JButton buyButton = new JButton();
